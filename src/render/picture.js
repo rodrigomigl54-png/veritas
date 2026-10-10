@@ -5,7 +5,10 @@ let manifest = { images: {}, galleryExtra: [] };
 
 // Single-file preview (scripts/build-preview.mjs): one embedded rendition per image, URLs mapped to data URIs.
 const preview = () => globalThis.__VERITAS_PREVIEW__;
-export const asset = (u) => preview()?.map?.[u] || u;
+// Site paths are emitted relative (no leading slash) so the site works under any base path
+// (e.g. https://user.github.io/veritas/ as well as the root of vinarijaveritas.com).
+const rel = (u) => (typeof u === 'string' ? u.replace(/^\//, '') : u);
+export const asset = (u) => preview()?.map?.[u] || preview()?.map?.['/' + rel(u)] || rel(u);
 export const previewUrl = (m) => `${m.base}-${m.widths.find((x) => x >= (m.alpha ? 480 : 1200)) || m.widths[m.widths.length - 1]}.webp`;
 
 export const setManifest = (m) => {
@@ -19,7 +22,7 @@ export const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 const fallbackFormat = (m) => (m.alpha ? 'png' : 'jpg');
-const srcset = (m, fmt) => m.widths.map((w) => `${m.base}-${w}.${fmt} ${w}w`).join(', ');
+const srcset = (m, fmt) => m.widths.map((w) => `${rel(m.base)}-${w}.${fmt} ${w}w`).join(', ');
 
 // URL of the smallest rendition that is at least `width` px wide.
 export function imageUrl(id, width = 1600, fmt) {
@@ -27,7 +30,7 @@ export function imageUrl(id, width = 1600, fmt) {
   if (!m) return null;
   if (preview()) return asset(previewUrl(m));
   const w = m.widths.find((x) => x >= width) || m.widths[m.widths.length - 1];
-  return `${m.base}-${w}.${fmt || (m.formats.includes('webp') ? 'webp' : fallbackFormat(m))}`;
+  return `${rel(m.base)}-${w}.${fmt || (m.formats.includes('webp') ? 'webp' : fallbackFormat(m))}`;
 }
 
 /**
@@ -67,7 +70,7 @@ export function picture(id, o = {}) {
   for (const fmt of modern) sources.push(`<source type="image/${fmt}" srcset="${srcset(m, fmt)}" sizes="${sizes}">`);
   const fb = fallbackFormat(m);
   const mid = m.widths[Math.min(m.widths.length - 1, 2)];
-  return `<picture class="${cls}" style="--lqip:url('${m.lqip}')">${sources.join('')}<img class="${o.imgClass || ''}" src="${m.base}-${mid}.${fb}" srcset="${srcset(m, fb)}" sizes="${sizes}" width="${m.width}" height="${m.height}" alt="${esc(alt)}"${altAttr} loading="${loading}" decoding="async"${priority}></picture>`;
+  return `<picture class="${cls}" style="--lqip:url('${m.lqip}')">${sources.join('')}<img class="${o.imgClass || ''}" src="${rel(m.base)}-${mid}.${fb}" srcset="${srcset(m, fb)}" sizes="${sizes}" width="${m.width}" height="${m.height}" alt="${esc(alt)}"${altAttr} loading="${loading}" decoding="async"${priority}></picture>`;
 }
 
 // Logo rendered as a CSS mask so it can be tinted (gold by default) and animated.
@@ -79,5 +82,5 @@ export function logo({ variant = 'white', className = '', label = 'Vinarija Veri
     return `<span class="logo logo--wordmark ${className}" role="img" aria-label="${esc(label)}"><span aria-hidden="true">VERITAS</span></span>`;
   }
   const url = asset(`${m.base}-${m.widths[m.widths.length - 1]}.png`);
-  return `<span class="logo ${className}" role="img" aria-label="${esc(label)}" style="--logo-url:url('${url}');aspect-ratio:${m.width}/${m.height}"></span>`;
+  return `<span class="logo ${className}" role="img" aria-label="${esc(label)}" style="-webkit-mask-image:url('${url}');mask-image:url('${url}');aspect-ratio:${m.width}/${m.height}"></span>`;
 }

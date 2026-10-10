@@ -3,7 +3,7 @@
 import { site, wines } from '../config/site.js';
 import { galleryImages, localImages, stockSlots } from '../config/images.js';
 import { t } from '../i18n/index.js';
-import { picture, logo, esc, getManifest, hasImage, imageMeta } from './picture.js';
+import { picture, logo, esc, getManifest, hasImage, imageMeta, asset } from './picture.js';
 import { icon } from './icons.js';
 import { winePanels, wineBottles, wineBackgrounds, wineLabels } from './wines.js';
 import { bookingForm, checkoutForm, newsletterForm } from './forms.js';
@@ -107,8 +107,8 @@ function heroVideo() {
   const v = site.heroVideo;
   if (!v) return '';
   // Starts paused (data-autoplay) — main.js plays it after the intro unless reduced motion is preferred.
-  return `<video class="hero__video" muted loop playsinline preload="none" data-autoplay${v.poster ? ` poster="${esc(v.poster)}"` : ''} aria-hidden="true">${v.sources
-    .map(([src, type]) => `<source src="${esc(src)}" type="${esc(type)}">`)
+  return `<video class="hero__video" muted loop playsinline preload="none" data-autoplay${v.poster ? ` poster="${esc(asset(v.poster))}"` : ''} aria-hidden="true">${v.sources
+    .map(([src, type]) => `<source src="${esc(asset(src))}" type="${esc(type)}">`)
     .join('')}</video>`;
 }
 

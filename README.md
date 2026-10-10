@@ -24,6 +24,12 @@ Useful URL switches for testing the intro: `?intro=2d` (2D fallback), `?intro=hi
 
 ## Deploy
 
+- **GitHub Pages (set up):** `.github/workflows/deploy-pages.yml` builds and publishes every push to
+  `main` → `https://rodrigomigl54-png.github.io/veritas/`. One-time: *Settings → Pages → Build and
+  deployment → Source: GitHub Actions*. Add `VITE_FORM_ACCESS_KEY` under *Settings → Secrets and
+  variables → Actions* to enable the forms. All URLs are relative, so the same build also works at the
+  root of a custom domain (vinarijaveritas.com).
+
 - **Netlify:** build command `npm run build`, publish directory `dist`. Add `VITE_FORM_ACCESS_KEY`
   under *Site settings → Environment variables*.
 - **Vercel:** framework preset “Vite”, output `dist`, same environment variable.

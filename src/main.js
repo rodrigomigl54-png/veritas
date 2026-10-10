@@ -19,10 +19,20 @@ import { initNewsletter } from './forms/newsletter.js';
 
 setManifest(manifest);
 
+// Hero drone loop: starts after the intro (never competes with it for bandwidth), not for reduced motion.
+function startHeroVideo() {
+  const v = document.querySelector('.hero__video[data-autoplay]');
+  if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData) return;
+  v.preload = 'auto';
+  v.addEventListener('playing', () => v.classList.add('is-playing'), { once: true });
+  v.play().catch(() => {});
+}
+
 // The intro starts first so its assets begin loading immediately.
 runIntro({
   onReveal: () => playHeroEntrance(),
   onFinish: () => {
+    startHeroVideo();
     window.scrollTo(0, 0);
     ScrollTrigger.refresh();
     getLenis()?.start();

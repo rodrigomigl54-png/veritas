@@ -7,7 +7,7 @@ import { gsap } from 'gsap';
 import { hasWebGL } from './quality.js';
 import { createPreloader } from './preload.js';
 import { setSound, playClink } from './audio.js';
-import { imageMeta } from '../render/picture.js';
+import { imageMeta, asset } from '../render/picture.js';
 import { t } from '../i18n/index.js';
 import { site } from '../config/site.js';
 import { reducedMotion } from '../ui/motion.js';
@@ -164,40 +164,69 @@ export function runIntro({ onReveal, onFinish } = {}) {
     requestAnimationFrame(step);
   };
 
-  // ---------- Real drone footage for shots 1–2 (optional, site.intro.droneVideo) ----------
-  // Plays full-screen, then dissolves into the 3D sky set where the barrel pours.
-  // Resolves when the clip has finished (or immediately with false if there is no / a broken clip).
+  // ---------- Real drone footage for shots 1–2 (site.intro.droneVideo) ----------
+  // Plays full-screen; ~1 s before the end the camera "whips" up into the sky (video slides down with
+  // motion blur while the 3D sky set slides in from above) and the barrel pour takes over.
+  // Resolves with { whip } when it is time to hand over, or null if there is no / a broken clip.
   const playDroneVideo = () =>
     new Promise((resolve) => {
-      const cfg = site.intro || {};
-      const mobile = window.matchMedia('(max-width: 767px)').matches;
-      const src = (mobile && cfg.droneVideoMobile) || cfg.droneVideo;
-      if (!src) return resolve(null);
+      const cfg = site.intro?.droneVideo;
+      if (!cfg) return resolve(null);
+      const small = window.matchMedia('(max-width: 900px)').matches || navigator.connection?.saveData;
       const video = document.createElement('video');
       video.className = 'intro__video';
-      Object.assign(video, { muted: true, playsInline: true, preload: 'auto', autoplay: true });
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'auto';
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
-      if (cfg.droneVideoPoster) video.poster = cfg.droneVideoPoster;
-      video.src = src;
+      if (cfg.poster) video.poster = asset(cfg.poster);
+      const srcs = small ? cfg.small : cfg.large;
+      srcs.forEach(([src, type]) => {
+        const el = document.createElement('source');
+        el.src = asset(src);
+        el.type = type;
+        video.append(el);
+      });
       canvas.before(video);
+      root.classList.add('has-video');
       let done = false;
-      const finish = (ok) => {
+      const handOver = () => {
         if (done) return;
         done = true;
-        resolve(ok ? video : null);
-        if (!ok) video.remove();
+        resolve({
+          // Whip-tilt: footage drops away below, the sky set arrives from above.
+          whip: () => {
+            const d = 1.05;
+            gsap.set(canvas, { yPercent: -100, filter: 'blur(14px)' });
+            gsap.to(canvas, { yPercent: 0, filter: 'blur(0px)', duration: d, ease: 'power3.inOut' });
+            gsap.to(video, { yPercent: 100, scale: 1.08, filter: 'blur(16px)', duration: d, ease: 'power3.inOut', onComplete: () => video.remove() });
+          },
+        });
       };
-      const end = cfg.droneVideoEnd; // optional cut point in seconds
-      video.addEventListener('timeupdate', () => end && video.currentTime >= end && finish(true));
-      video.addEventListener('ended', () => finish(true));
-      video.addEventListener('error', () => finish(false));
-      video.play().catch(() => finish(false));
+      const fail = () => {
+        if (done) return;
+        done = true;
+        video.remove();
+        root.classList.remove('has-video');
+        resolve(null);
+      };
+      video.addEventListener('timeupdate', () => {
+        if (video.duration && video.currentTime >= video.duration - 1.0) handOver();
+      });
+      video.addEventListener('ended', handOver);
+      // Only give up when the LAST <source> fails (the browser tries them in order) or the media errors.
+      video.lastElementChild?.addEventListener('error', fail);
+      video.addEventListener('error', fail);
+      // Slow push-in for extra drone speed.
+      gsap.fromTo(video, { scale: 1.0 }, { scale: 1.12, duration: 6, ease: 'none' });
+      video.play().catch(fail);
     });
 
   // ---------- 3D version ----------
   const run3D = async () => {
     const videoDone = playDroneVideo();
+    const hasVideo = !!site.intro?.droneVideo;
     try {
       const [{ createIntroScene }, THREE] = await Promise.all([import('./scene.js'), import('three')]);
       if (skipping || revealing) return;
@@ -208,7 +237,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
       if (meta) {
         logoImage = await new Promise((resolve) => {
           const p = new Promise((done) => {
-            new THREE.ImageLoader(manager).load(`${meta.base}-${meta.widths[meta.widths.length - 1]}.png`, (img) => (resolve(img), done()), undefined, () => (resolve(null), done()));
+            new THREE.ImageLoader(manager).load(asset(`${meta.base}-${meta.widths[meta.widths.length - 1]}.png`), (img) => (resolve(img), done()), undefined, () => (resolve(null), done()));
           });
           preloader.track(p);
         });
@@ -217,6 +246,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
       scene = createIntroScene(canvas, {
         logoImage,
         forceTier: params.get('intro'),
+        withVineyard: !hasVideo,
         progress: preloader.progress,
         onPercent: (p, visible, y) => {
           percentEl.textContent = `${Math.round(p * 100)}%`;
@@ -233,9 +263,12 @@ export function runIntro({ onReveal, onFinish } = {}) {
       const video = await videoDone;
       if (skipping || revealing) return;
       if (video) {
-        // Real footage ended in the sky → dissolve into the barrel + glasses.
         scene.start('pour');
-        gsap.to(video, { opacity: 0, duration: 0.7, ease: 'power2.inOut', onComplete: () => video.remove() });
+        video.whip();
+      } else if (hasVideo) {
+        // Footage could not play: start in the sky set with a soft fade (no empty vineyard flight).
+        gsap.fromTo(canvas, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+        scene.start('pour');
       } else {
         scene.start();
       }

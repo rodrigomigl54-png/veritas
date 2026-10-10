@@ -47,7 +47,7 @@ html:not(.is-intro) .intro {
   will-change: transform, opacity;
 }
 .intro__logo-mark {
-  height: clamp(90px, 16vw, 180px);
+  height: clamp(150px, 26vw, 280px);
   animation: logoShimmer 3s linear infinite;
 }
 .intro__logo-mark.logo--wordmark {
@@ -531,4 +531,11 @@ html.is-intro .header-logo {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+}
+.intro.has-video .intro__canvas {
+  will-change: transform, filter;
+}
+.intro__video {
+  will-change: transform, filter;
+  transform-origin: 50% 40%;
 }

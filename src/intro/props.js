@@ -12,11 +12,11 @@ export function createSky() {
     fog: false,
     uniforms: {
       uSun: { value: new THREE.Vector3(0.62, 0.05, -1).normalize() },
-      uHorizon: { value: new THREE.Color('#F0C27E') },
-      uGold: { value: new THREE.Color('#E2C98F') },
-      uMid: { value: new THREE.Color('#B4605A') },
-      uTop: { value: new THREE.Color('#2B0F2A') },
-      uHaze: { value: new THREE.Color('#D9A46C') },
+      uHorizon: { value: new THREE.Color('#E8A458') },
+      uGold: { value: new THREE.Color('#C9783F') },
+      uMid: { value: new THREE.Color('#7A2E36') },
+      uTop: { value: new THREE.Color('#1E0A1C') },
+      uHaze: { value: new THREE.Color('#5A2A20') },
     },
     vertexShader: `varying vec3 vDir;
       void main(){ vDir = normalize(position); vec4 p = projectionMatrix * modelViewMatrix * vec4(position,1.0); gl_Position = p.xyww; }`,
@@ -24,9 +24,9 @@ export function createSky() {
       void main(){
         vec3 d = normalize(vDir);
         float h = d.y;
-        vec3 col = mix(uHorizon, uGold, smoothstep(0.0, 0.08, h));
-        col = mix(col, uMid, smoothstep(0.06, 0.32, h));
-        col = mix(col, uTop, smoothstep(0.25, 0.85, h));
+        vec3 col = mix(uHorizon, uGold, smoothstep(0.0, 0.06, h));
+        col = mix(col, uMid, smoothstep(0.04, 0.22, h));
+        col = mix(col, uTop, smoothstep(0.18, 0.6, h));
         float sun = max(dot(d, uSun), 0.0);
         col += vec3(1.0, 0.78, 0.48) * pow(sun, 900.0) * 3.0;
         col += vec3(1.0, 0.62, 0.32) * pow(sun, 12.0) * 0.45;

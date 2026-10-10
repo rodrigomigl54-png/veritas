@@ -1,7 +1,7 @@
 // Build-time HTML for the one-page site. Runs in Node inside the Vite plugin (vite.config.js),
 // so the full Serbian content is in the static HTML for SEO; the client only swaps languages.
 import { site, wines } from '../config/site.js';
-import { galleryImages, stockSlots } from '../config/images.js';
+import { galleryImages, localImages, stockSlots } from '../config/images.js';
 import { t } from '../i18n/index.js';
 import { picture, logo, esc, getManifest, hasImage, imageMeta } from './picture.js';
 import { icon } from './icons.js';
@@ -103,10 +103,19 @@ function header() {
 }
 
 // ---------- Hero + philosophy ----------
+function heroVideo() {
+  const v = site.heroVideo;
+  if (!v) return '';
+  // Starts paused (data-autoplay) — main.js plays it after the intro unless reduced motion is preferred.
+  return `<video class="hero__video" muted loop playsinline preload="none" data-autoplay${v.poster ? ` poster="${esc(v.poster)}"` : ''} aria-hidden="true">${v.sources
+    .map(([src, type]) => `<source src="${esc(src)}" type="${esc(type)}">`)
+    .join('')}</video>`;
+}
+
 function hero() {
   const pbg = sectionBg('philosophy');
   return `<section class="hero" id="pocetna" aria-labelledby="hero-title">
-  <div class="hero__media">${picture('hero-desktop', { mobileId: 'hero-mobile', alt: 'Vinarija Veritas, Sremski Karlovci', eager: true, className: 'hero__pic' })}</div>
+  <div class="hero__media">${picture('hero-desktop', { mobileId: 'hero-mobile', alt: 'Vinarija Veritas, Sremski Karlovci', eager: true, className: 'hero__pic' })}${heroVideo()}</div>
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="hero__content container">
     <p class="eyebrow hero__eyebrow" ${tx('hero.eyebrow')}</p>
@@ -219,7 +228,7 @@ function vineyards() {
 // ---------- Cellar ----------
 function cellar() {
   const bg = sectionBg('cellar');
-  const stock = Object.keys(stockSlots).filter((id) => id.startsWith('stock-cellar') && hasImage(id));
+  const stock = [...Object.keys(stockSlots).filter((id) => id.startsWith('stock-cellar')), ...(site.cellarPhotos || [])].filter(hasImage).slice(0, 4);
   const tiles = [
     `<div class="collage__item collage__item--a parallax" data-speed="-0.06">${picture('cellar-hero', { mobileId: 'cellar-hero-mobile', alt: 'Barik podrum vinarije Veritas', sizes: '(max-width: 767px) 100vw, 50vw' })}</div>`,
     `<div class="collage__item collage__item--b parallax" data-speed="0.08">${picture('cellar-1', { alt: 'Podrum vinarije Veritas', sizes: '(max-width: 767px) 60vw, 25vw' })}</div>`,
@@ -284,7 +293,8 @@ function visits() {
 function gallery() {
   const bg = sectionBg('gallery');
   const m = getManifest();
-  const ids = [...Object.keys(galleryImages), ...(m.galleryExtra || [])];
+  // Only photos that actually exist (winery originals first, then supplied photos and drone stills).
+  const ids = [...Object.keys(galleryImages), ...(m.galleryExtra || []), ...Object.keys(localImages)].filter(hasImage);
   const items = ids
     .map((id, i) => {
       const meta = imageMeta(id);

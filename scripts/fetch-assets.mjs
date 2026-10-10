@@ -18,14 +18,16 @@ const cacheDir = path.join(root, '.cache/assets');
 const publicDir = path.join(root, 'public');
 export const manifestPath = path.join(root, 'src/config/image-manifest.json');
 const force = process.argv.includes('--force');
+const offline = process.argv.includes('--offline');
 // `--from <folder>`: use original files from a local folder (e.g. images saved from the old site),
 // matched by file name (bela-harmonija.png, 2022-pocetna-2.jpg, DJI_0047.jpg …). URLs are the fallback.
 const fromIdx = process.argv.indexOf('--from');
-const fromDir = fromIdx > -1 ? path.resolve(process.argv[fromIdx + 1]) : null;
+const fromDir = fromIdx > -1 ? path.resolve(process.argv[fromIdx + 1]) : path.join(root, 'assets/source');
 let localFiles = null;
 async function localIndex() {
-  if (localFiles || !fromDir) return localFiles || new Map();
+  if (localFiles) return localFiles;
   localFiles = new Map();
+  if (!(await exists(fromDir))) return localFiles;
   const walk = async (dir) => {
     for (const e of await fs.readdir(dir, { withFileTypes: true })) {
       const full = path.join(dir, e.name);
@@ -54,7 +56,8 @@ async function exists(p) {
 
 async function download(url, dest) {
   if (!force && (await exists(dest))) return true;
-  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (veritas-asset-fetch)' } });
+  if (offline) return false;
+  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (veritas-asset-fetch)' }, signal: AbortSignal.timeout(15000) });
   if (!res.ok) return false;
   const type = res.headers.get('content-type') || '';
   if (!type.startsWith('image/')) return false;
@@ -71,6 +74,7 @@ async function fetchFirst(id, candidates) {
     if (file) return { url: `local:${path.basename(file)}`, file };
   }
   for (const url of candidates) {
+    if (url.startsWith('local:')) continue;
     const ext = path.extname(new URL(url).pathname) || '.jpg';
     const dest = path.join(cacheDir, `${id}${ext}`);
     try {
@@ -147,6 +151,17 @@ export async function processImage(id, meta, src) {
     input = await sharp(input).trim({ threshold: 1 }).toBuffer();
   }
 
+  // Small source photos (thumbnails): high-quality 2–3× upscale (Lanczos3 + gentle sharpening) so the
+  // browser does not have to stretch them. A real original should replace them whenever available.
+  let upscaled = false;
+  if (!meta.bottle && !id.startsWith('logo')) {
+    const m0 = await sharp(input).metadata();
+    if (m0.width < 900) {
+      const target = Math.min(1500, Math.round(m0.width * (m0.width < 400 ? 3 : 2)));
+      input = await sharp(input).rotate().resize({ width: target, kernel: 'lanczos3' }).sharpen({ sigma: 0.9, m1: 0.6, m2: 1.4 }).modulate({ saturation: 1.04 }).jpeg({ quality: 95 }).toBuffer();
+      upscaled = true;
+    }
+  }
   const base = sharp(input).rotate();
   const { width, height } = await base.metadata();
   const alpha = !!meta.alpha;
@@ -184,6 +199,7 @@ export async function processImage(id, meta, src) {
     dominant: hex,
     source: src.url,
     ...(transparentFixed ? { backgroundRemoved: true } : {}),
+    ...(upscaled ? { upscaled: true } : {}),
   };
 }
 
@@ -193,8 +209,9 @@ const originalOf = (url) => url.replace(/-\d{2,4}x\d{2,4}(?=\.\w+$)/, '').replac
 async function crawlExtraImages(knownUrls) {
   const found = new Set();
   for (const page of crawlPages) {
+    if (offline) break;
     try {
-      const res = await fetch(page);
+      const res = await fetch(page, { signal: AbortSignal.timeout(15000) });
       if (!res.ok) continue;
       const html = await res.text();
       const re = /https?:\/\/vinarijaveritas\.com\/wp-content\/uploads\/[^"'\s)]+?\.(?:jpe?g|png|webp)/gi;
@@ -260,8 +277,10 @@ async function main() {
   const manifest = { generatedAt: new Date().toISOString(), images: { ...(previous.images || {}) }, galleryExtra: previous.galleryExtra || [], missing: [] };
 
   const entries = Object.entries(allImages);
+  const sources = {};
   for (const [id, meta] of entries) {
     const src = await fetchFirst(id, meta.candidates);
+    if (src) sources[id] = src.file;
     if (!src) {
       log(`✗ ${id} — not reachable`);
       manifest.missing.push(id);
@@ -288,12 +307,12 @@ async function main() {
     log(`✓ ${id} (crawled) ← ${url}`);
   }
 
-  const emblem = path.join(cacheDir, 'logo-emblem.png');
-  if (await exists(emblem)) await makeFavicons(emblem);
-  const hero = path.join(cacheDir, 'hero-desktop.jpg');
-  if (await exists(hero)) await makeOgImage(hero);
-  const logoMain = path.join(cacheDir, 'logo-main.png');
-  if (await exists(logoMain)) {
+  const emblem = sources['logo-emblem'];
+  if (emblem) await makeFavicons(emblem);
+  const hero = sources['hero-desktop'];
+  if (hero) await makeOgImage(hero);
+  const logoMain = sources['logo-main'];
+  if (logoMain) {
     const svg = await traceLogo(logoMain, 'veritas-logo.svg').catch((e) => log('trace failed', e.message));
     if (svg) manifest.logoSvg = svg;
   }

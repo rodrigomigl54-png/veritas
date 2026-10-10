@@ -6,3 +6,4 @@ dist
 *.log
 # local layout-rehearsal helper (synthetic images, never committed)
 scripts/_simulate.tmp.mjs
+preview/

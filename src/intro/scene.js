@@ -74,8 +74,9 @@ export function createIntroScene(canvas, o) {
   // ---------- World ----------
   const sky = createSky();
   scene.add(sky);
-  const vineyard = createVineyard({ tier, maxAniso, time });
-  scene.add(vineyard.group);
+  // With real drone footage (o.withVineyard === false) the procedural vineyard is never built.
+  const vineyard = o.withVineyard === false ? null : createVineyard({ tier, maxAniso, time });
+  if (vineyard) scene.add(vineyard.group);
 
   const sunDir = new THREE.Vector3(0.62, 0.05, -1).normalize();
   const sun = new THREE.DirectionalLight(new THREE.Color('#FFC27A'), 3.4);
@@ -215,7 +216,7 @@ export function createIntroScene(canvas, o) {
         sun.castShadow = false;
         resize();
       } else {
-        vineyard.degrade();
+        vineyard?.degrade();
       }
     }
     slowFrames = 0;
@@ -254,12 +255,22 @@ export function createIntroScene(canvas, o) {
     keyLight.intensity = lerp(0, 6, e);
   };
 
+  // After the whip-tilt from the drone footage the camera settles: it overshoots upwards, then eases
+  // down onto the barrel (settleT counts down from SETTLE).
+  const SETTLE = 1.3;
+  let settleT = 0;
   const holdSetCam = (push = 0) => {
     const end = setCam();
     const toward = end.look.clone().sub(end.pos).normalize();
     camera.position.copy(end.pos).addScaledVector(toward, push);
     camera.position.y += Math.sin(elapsed * 0.9) * 0.02;
-    lookQ(camera.position, end.look, 0, camera.quaternion);
+    const look = end.look.clone();
+    if (settleT > 0) {
+      const k = settleT / SETTLE; // 1 → 0
+      look.y += easeIn(k) * 2.6;
+      camera.position.y -= easeIn(k) * 0.5;
+    }
+    lookQ(camera.position, look, 0, camera.quaternion);
     camera.fov = end.fov;
   };
 
@@ -398,6 +409,14 @@ export function createIntroScene(canvas, o) {
         phase = 'pour';
         phaseT = 0;
       }
+    } else if (phase === 'settle') {
+      settleT = Math.max(0, SETTLE - phaseT);
+      holdSetCam(0);
+      o.onPercent(0, phaseT > SETTLE * 0.6, percentY);
+      if (phaseT >= SETTLE) {
+        phase = 'pour';
+        phaseT = 0;
+      }
     } else if (phase === 'pour') {
       if (shotPour(phaseT, realDt)) {
         phase = 'toast';
@@ -417,7 +436,7 @@ export function createIntroScene(canvas, o) {
     glasses.updateLiquid(glasses.left, dt);
     glasses.updateLiquid(glasses.right, dt);
     droplets.update(dt, SET.y + GL_Y - 0.5);
-    if (phase === 'pour') {
+    if (phase === 'pour' || phase === 'settle') {
       // Keep the percentage just below the glasses' feet.
       v.set(SET.x, SET.y + GL_Y - 0.4 * GS - 0.06, SET.z + GL_Z).project(camera);
       percentY = (-v.y * 0.5 + 0.5) * window.innerHeight;
@@ -449,8 +468,12 @@ export function createIntroScene(canvas, o) {
     start(startPhase) {
       last = performance.now();
       if (startPhase === 'pour') {
-        phase = 'pour';
+        phase = 'settle';
+        settleT = SETTLE;
         shotRise(RISE);
+        scene.fog.density = 0.0045;
+        keyLight.intensity = 6;
+        holdSetCam(0);
         prevCam.copy(camera.position);
         raf = requestAnimationFrame(frame);
         return;

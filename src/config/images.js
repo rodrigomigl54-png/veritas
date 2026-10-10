@@ -4,6 +4,8 @@
 // `candidates` are tried in order — the first URL that exists wins (used to find full-size originals).
 
 const U = 'https://vinarijaveritas.com/wp-content/uploads';
+// Local fallback: a file in assets/source/** with this name (used when the original isn't available).
+const L = (name) => `local:${name}`;
 
 export const brandImages = {
   'logo-main': { candidates: [`${U}/2022/08/Veritas-logo.png`], alpha: true },
@@ -12,34 +14,35 @@ export const brandImages = {
 };
 
 export const siteImages = {
-  'hero-desktop': { candidates: [`${U}/2022/10/2022-pocetna-2.jpg`] },
+  'hero-desktop': { candidates: [`${U}/2022/10/2022-pocetna-2.jpg`, L('dron-3.5.jpg')] },
   'hero-mobile': { candidates: [`${U}/2022/10/2022-pocetna-2-mob.jpg`] },
   philosophy: {
     candidates: [
       `${U}/2022/08/nasa-filozofija.jpg`,
       `${U}/2022/10/nasa-filozofija.jpg`,
       `${U}/elementor/thumbs/nasa-filozofija-psox27zywoce1j1m0mtbqt9z9js2q1buk6ryf98s3k.jpg`,
+      L('photo-vineyard-poplars.jpg'),
     ],
   },
 
-  'about-hero': { candidates: [`${U}/2022/08/o-nama-hero.jpg`] },
+  'about-hero': { candidates: [`${U}/2022/08/o-nama-hero.jpg`, L('veritas-vinograd-put.jpg')] },
   'about-hero-mobile': { candidates: [`${U}/2022/08/o-nama-hero-mob.jpg`] },
-  'about-1': { candidates: [`${U}/2022/08/o-nama-1.jpg`] },
-  'about-2': { candidates: [`${U}/2022/08/o-nama-2.jpg`] },
+  'about-1': { candidates: [`${U}/2022/08/o-nama-1.jpg`, L('photo-lineup.jpg')] },
+  'about-2': { candidates: [`${U}/2022/08/o-nama-2.jpg`, L('photo-terrace.jpg')] },
 
-  'vineyards-hero': { candidates: [`${U}/2022/10/2022-vinogradi.jpg`] },
+  'vineyards-hero': { candidates: [`${U}/2022/10/2022-vinogradi.jpg`, L('dron-11.5.jpg')] },
   'vineyards-hero-mobile': { candidates: [`${U}/2022/10/2022-vinogradi-mob.jpg`] },
-  'vineyards-1': { candidates: [`${U}/2022/08/vinogradi-1.jpg`] },
+  'vineyards-1': { candidates: [`${U}/2022/08/vinogradi-1.jpg`, L('dron-8.5.jpg')] },
 
-  'cellar-hero': { candidates: [`${U}/2022/08/podrum-hero.jpg`] },
+  'cellar-hero': { candidates: [`${U}/2022/08/podrum-hero.jpg`, L('photo-cellar-1.jpg')] },
   'cellar-hero-mobile': { candidates: [`${U}/2022/08/podrum-hero-mob.jpg`] },
-  'cellar-1': { candidates: [`${U}/2022/08/podrum-1.jpg`] },
+  'cellar-1': { candidates: [`${U}/2022/08/podrum-1.jpg`, L('photo-cellar-3.jpg')] },
 
-  'visits-hero': { candidates: [`${U}/2022/08/posete-i-dogadjaji-hero.jpg`] },
+  'visits-hero': { candidates: [`${U}/2022/08/posete-i-dogadjaji-hero.jpg`, L('photo-two-glasses.jpg')] },
   'visits-hero-mobile': { candidates: [`${U}/2022/08/posete-i-dogadjaji-hero-mob.jpg`] },
-  'visits-1': { candidates: [`${U}/2022/08/posete-dogadjaji-1.jpg`] },
+  'visits-1': { candidates: [`${U}/2022/08/posete-dogadjaji-1.jpg`, L('photo-food.jpg')] },
   'visits-2': {
-    candidates: [`${U}/2022/08/posete-dogadjaji-najava.jpg`, `${U}/2022/08/posete-dogadjaji-najava-1024x683.jpg`],
+    candidates: [`${U}/2022/08/posete-dogadjaji-najava.jpg`, `${U}/2022/08/posete-dogadjaji-najava-1024x683.jpg`, L('photo-rose-glass.jpg')],
   },
 };
 
@@ -66,6 +69,17 @@ export const galleryImages = Object.fromEntries(
   }),
 );
 
+// Photos supplied by the winery (assets/source/photos) and stills from the graded drone footage
+// (assets/source/frames, made by scripts/grade-video.sh). Shown in the gallery and used as section photos.
+export const localImages = Object.fromEntries(
+  [
+    'photo-two-glasses', 'photo-lineup', 'photo-vineyard-poplars', 'photo-grapes', 'photo-rose-glass', 'photo-terrace',
+    'photo-cellar-2', 'photo-cellar-1', 'photo-food', 'photo-cellar-3', 'veritas-vinograd-put',
+  ].map((n) => [n, { candidates: [L(`${n}.jpg`)], gallery: true }]).concat(
+    ['0.7', '3.5', '6.5', '8.5', '9.8', '11.5'].map((t) => [`dron-${t.replace('.', '-')}`, { candidates: [L(`dron-${t}.jpg`)], gallery: true }]),
+  ),
+);
+
 // Pages crawled for additional gallery photos not listed above.
 export const crawlPages = [
   'https://vinarijaveritas.com/',
@@ -89,4 +103,4 @@ export const stockSlots = {
   'stock-cellar-glass-4': { use: 'Podrum — čaša crvenog vina, vinograd u zalasku sunca' },
 };
 
-export const allImages = { ...brandImages, ...siteImages, ...bottleImages, ...galleryImages };
+export const allImages = { ...brandImages, ...siteImages, ...bottleImages, ...galleryImages, ...localImages };

@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "assets": "node scripts/fetch-assets.mjs",
-    "assets:stock": "node scripts/fetch-stock.mjs"
+    "assets:stock": "node scripts/fetch-stock.mjs",
+    "preview:file": "node scripts/build-preview.mjs",
+    "video": "bash scripts/grade-video.sh"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "potrace": "^2.1.8",
     "sharp": "^0.35.5",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.3"
   }
 }

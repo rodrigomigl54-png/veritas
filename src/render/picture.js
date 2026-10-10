@@ -3,6 +3,11 @@
 
 let manifest = { images: {}, galleryExtra: [] };
 
+// Single-file preview (scripts/build-preview.mjs): one embedded rendition per image, URLs mapped to data URIs.
+const preview = () => globalThis.__VERITAS_PREVIEW__;
+export const asset = (u) => preview()?.map?.[u] || u;
+export const previewUrl = (m) => `${m.base}-${m.widths.find((x) => x >= (m.alpha ? 480 : 1200)) || m.widths[m.widths.length - 1]}.webp`;
+
 export const setManifest = (m) => {
   manifest = m || manifest;
 };
@@ -20,6 +25,7 @@ const srcset = (m, fmt) => m.widths.map((w) => `${m.base}-${w}.${fmt} ${w}w`).jo
 export function imageUrl(id, width = 1600, fmt) {
   const m = manifest.images[id];
   if (!m) return null;
+  if (preview()) return asset(previewUrl(m));
   const w = m.widths.find((x) => x >= width) || m.widths[m.widths.length - 1];
   return `${m.base}-${w}.${fmt || (m.formats.includes('webp') ? 'webp' : fallbackFormat(m))}`;
 }
@@ -43,6 +49,9 @@ export function picture(id, o = {}) {
   if (!m) {
     // Image not downloaded yet (run `npm run assets`). Render a neutral, labelled placeholder.
     return `<div class="${cls} img-missing" role="img" aria-label="${esc(alt)}" data-missing="${esc(id)}"></div>`;
+  }
+  if (preview()) {
+    return `<picture class="${cls}"><img class="${o.imgClass || ''}" src="${asset(previewUrl(m))}" width="${m.width}" height="${m.height}" alt="${esc(alt)}"${altAttr} decoding="async"></picture>`;
   }
   const sizes = o.sizes || '100vw';
   const mm = o.mobileId && manifest.images[o.mobileId];
@@ -69,6 +78,6 @@ export function logo({ variant = 'white', className = '', label = 'Vinarija Veri
   if (!m) {
     return `<span class="logo logo--wordmark ${className}" role="img" aria-label="${esc(label)}"><span aria-hidden="true">VERITAS</span></span>`;
   }
-  const url = `${m.base}-${m.widths[m.widths.length - 1]}.png`;
+  const url = asset(`${m.base}-${m.widths[m.widths.length - 1]}.png`);
   return `<span class="logo ${className}" role="img" aria-label="${esc(label)}" style="--logo-url:url('${url}');aspect-ratio:${m.width}/${m.height}"></span>`;
 }

@@ -53,29 +53,50 @@ export const site = {
     customerCopy: false,
   },
 
-  // Intro: real drone footage for shots 1–2 (flight through the vineyard + rise into the sky).
-  // Put the files in /public/video/ and set the paths, e.g. '/video/dron-vinograd.mp4'.
-  // While null, the procedural 3D vineyard is used. The 3D barrel pour always follows.
+  // Intro: real drone footage for shots 1–2 (flight over the vineyard), then a whip-tilt into the sky
+  // where the 3D barrel pours. Built by scripts/grade-video.sh (golden-hour grade) from Pexels #19237031.
+  // Set to null to use the procedural 3D vineyard instead.
   intro: {
-    droneVideo: null, // 1920×1080 or 2560×1440 H.264/HEVC mp4, ~5 s, muted
-    droneVideoMobile: null, // optional lighter/vertical version for phones
-    droneVideoPoster: null, // first frame as a JPG/WebP
-    droneVideoEnd: null, // optional cut point in seconds
+    droneVideo: {
+      poster: '/video/intro-poster.jpg',
+      large: [
+        ['/video/intro-drone-1080.webm', 'video/webm'],
+        ['/video/intro-drone-1080.mp4', 'video/mp4'],
+      ],
+      small: [
+        ['/video/intro-drone-720.webm', 'video/webm'],
+        ['/video/intro-drone-720.mp4', 'video/mp4'],
+      ],
+    },
+  },
+
+  // Hero background: slow looping drone footage (poster = still frame). Null = photo only.
+  heroVideo: {
+    poster: '/video/intro-poster.jpg',
+    sources: [
+      ['/video/hero-loop.webm', 'video/webm'],
+      ['/video/hero-loop.mp4', 'video/mp4'],
+    ],
   },
 
   // Full-bleed background photo per section (ids from src/config/images.js). The overlay colour is
   // taken automatically from each photo's dominant colour, so text, lines and tint match the picture.
   // Change `image` to use another photo; `strength` (0–1) = how dark the overlay is.
   sectionBackgrounds: {
-    philosophy: { image: 'philosophy', strength: 0.86, blur: true },
-    about: { image: 'gallery-dji_0047', fallback: 'about-hero', fallbackMobile: 'about-hero-mobile', strength: 0.78 },
-    vineyards: { image: 'vineyards-hero', mobile: 'vineyards-hero-mobile', strength: 0.72 },
-    cellar: { image: 'cellar-hero', mobile: 'cellar-hero-mobile', strength: 0.82 },
-    visits: { image: 'visits-hero', mobile: 'visits-hero-mobile', strength: 0.78 },
-    gallery: { image: 'gallery-aca_8631', strength: 0.88 },
-    shops: { image: 'gallery-aca_8470', strength: 0.84 },
-    contact: { image: 'gallery-dji_0047', strength: 0.82 },
+    philosophy: { image: 'photo-grapes', strength: 0.82, blur: true },
+    about: { image: 'veritas-vinograd-put', strength: 0.74 },
+    vineyards: { image: 'dron-11-5', strength: 0.7 },
+    cellar: { image: 'photo-cellar-2', strength: 0.8, blur: true },
+    visits: { image: 'photo-two-glasses', strength: 0.78, blur: true },
+    gallery: { image: 'photo-lineup', strength: 0.86, blur: true },
+    shops: { image: 'dron-6-5', strength: 0.8 },
+    contact: { image: 'dron-9-8', strength: 0.76 },
   },
+
+  // Extra photos in the cellar collage (the wine-glass pictures).
+  cellarPhotos: ['photo-two-glasses', 'photo-rose-glass', 'photo-grapes'],
+
+
 
   // About section background video. TODO: replace the photo with a video — set e.g. '/video/vinograd.mp4'.
   aboutVideo: null,

@@ -1,0 +1,9 @@
+node_modules
+dist
+.cache
+.env
+.env.local
+*.log
+# local layout-rehearsal helper (synthetic images, never committed)
+scripts/_simulate.tmp.mjs
+preview/

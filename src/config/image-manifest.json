@@ -1,0 +1,764 @@
+{
+  "generatedAt": "2026-10-10T23:17:41.437Z",
+  "images": {
+    "logo-main": {
+      "base": "/images/brand/logo-main",
+      "width": 512,
+      "height": 512,
+      "widths": [
+        160,
+        320,
+        512
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRvgBAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSHYBAAABkGVb2/FIz4+ybcR28ldsc6Vs27Zt16XRvOspdM+sehARkQAIpDGBYCwS8GrSQOCLAMdeTgMAVWauxv98lYgr8g/EjeJkil0FgEBRFW0aHGpbUFt9OjmRlwkCdAHkgYWHGWteErstJEECSZDJYLcGt72PP8b675WuRlkik1RiyIzWhmtve1Z6q/r8U6pIjpIlkXLC5pD691BbpM42N8LyyPNVEZZZ6Vh9mzjYeBjyjHTJfI48YyzNLXWt/WtyDYn4ng27PDuUY6rL8XBr9n4d9M+EI4Ku73XpdSDr+BYJVv4oogcjTJXhfYyx8ysZHsuB0LehSJPPnjD2XB+TMbJqd76z3Np1aDC0j1i3J+MNVbbydF5NPzuvYiwuL5KvtTt8rByGBrlstUfTSn/PB32a8pL2uTqKQIYCrX0hxdbfvT6B251kb0kGSCjmK7irVmfdrIF33FhcAAIE0gwsy4XCWxCQFMSMGSDwRUHTzO0qk9pQApIAAFZQOCBcAAAAMAQAnQEqFAAUAD7taq9QqaWkIqgKqTAdiWkAz6AZmN+w9V0YhYNTrtnAAP7vwJHCpPnABwNlq9NEbqlw2bdQeaBDhjGZnTNLYncoV5dMSlJwg32233VF8IjoAAA=",
+      "dominant": "#080808",
+      "source": "local:Veritas-logo.png"
+    },
+    "logo-white": {
+      "base": "/images/brand/logo-white",
+      "width": 512,
+      "height": 512,
+      "widths": [
+        160,
+        320,
+        512
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRsIBAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSHYBAAABkGVb2/FIz4+ybcR28ldsc6Vs27Zt16XRvOspdM+sehARkQAIpDGBYCwS8GrSQOCLAMdeTgMAVWauxv98lYgr8g/EjeJkil0FgEBRFW0aHGpbUFt9OjmRlwkCdAHkgYWHGWteErstJEECSZDJYLcGt72PP8b675WuRlkik1RiyIzWhmtve1Z6q/r8U6pIjpIlkXLC5pD691BbpM42N8LyyPNVEZZZ6Vh9mzjYeBjyjHTJfI48YyzNLXWt/WtyDYn4ng27PDuUY6rL8XBr9n4d9M+EI4Ku73XpdSDr+BYJVv4oogcjTJXhfYyx8ysZHsuB0LehSJPPnjD2XB+TMbJqd76z3Np1aDC0j1i3J+MNVbbydF5NPzuvYiwuL5KvtTt8rByGBrlstUfTSn/PB32a8pL2uTqKQIYCrX0hxdbfvT6B251kb0kGSCjmK7irVmfdrIF33FhcAAIE0gwsy4XCWxCQFMSMGSDwRUHTzO0qk9pQApIAAFZQOCAmAAAA0AIAnQEqFAAUAD7tcLFSqaYkoqgIATAdiWkAAD2joAD+8N9FoAA=",
+      "dominant": "#f8f8f8",
+      "source": "local:veritas-logo-beli.png"
+    },
+    "logo-emblem": {
+      "base": "/images/brand/logo-emblem",
+      "width": 512,
+      "height": 512,
+      "widths": [
+        160,
+        320,
+        512
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRvgBAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSHYBAAABkGVb2/FIz4+ybcR28ldsc6Vs27Zt16XRvOspdM+sehARkQAIpDGBYCwS8GrSQOCLAMdeTgMAVWauxv98lYgr8g/EjeJkil0FgEBRFW0aHGpbUFt9OjmRlwkCdAHkgYWHGWteErstJEECSZDJYLcGt72PP8b675WuRlkik1RiyIzWhmtve1Z6q/r8U6pIjpIlkXLC5pD691BbpM42N8LyyPNVEZZZ6Vh9mzjYeBjyjHTJfI48YyzNLXWt/WtyDYn4ng27PDuUY6rL8XBr9n4d9M+EI4Ku73XpdSDr+BYJVv4oogcjTJXhfYyx8ysZHsuB0LehSJPPnjD2XB+TMbJqd76z3Np1aDC0j1i3J+MNVbbydF5NPzuvYiwuL5KvtTt8rByGBrlstUfTSn/PB32a8pL2uTqKQIYCrX0hxdbfvT6B251kb0kGSCjmK7irVmfdrIF33FhcAAIE0gwsy4XCWxCQFMSMGSDwRUHTzO0qk9pQApIAAFZQOCBcAAAAMAQAnQEqFAAUAD7taq9QqaWkIqgKqTAdiWkAz6AZmN+w9V0YhYNTrtnAAP7vwJHCpPnABwNlq9NEbqlw2bdQeaBDhjGZnTNLYncoV5dMSlJwg32233VF8IjoAAA=",
+      "dominant": "#080808",
+      "source": "local:cropped-Veritas-favicon.png"
+    },
+    "hero-desktop": {
+      "base": "/images/site/hero-desktop",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JaACdMoACtA5b46PFkYnMAAD+0CJ1+hvscE+tRm1W89uqGEM2WD5I5IAeoMoVjTbnE2CmgrD12AAA",
+      "dominant": "#483818",
+      "source": "local:dron-3.5.jpg"
+    },
+    "philosophy": {
+      "base": "/images/site/philosophy",
+      "width": 894,
+      "height": 894,
+      "widths": [
+        480,
+        800,
+        894
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBACdASoUABQAPu1oqk+ppaOiKA1RMB2JQBhWbIAsuNE7ctbnUh+3DD24zWyAAP6x92MKNxBrndLDvNPZrD+kdqePvl+kxyZn0t3rt4doTaxOT2JG7ri1qyPW5iUgSIYTwfhopCR1eMBHyxBnnMKZfKNJsDds3es81QZ7rrQRuJygwqKWs3XTtyygq9d8xiwaX1k1Zcuciuxwb16tAAAA",
+      "dominant": "#181808",
+      "source": "local:photo-vineyard-poplars.jpg",
+      "upscaled": true
+    },
+    "about-hero": {
+      "base": "/images/site/about-hero",
+      "width": 968,
+      "height": 340,
+      "widths": [
+        480,
+        800,
+        968
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAwCdASoUAAcAPu1iqU2ppaQiMAgBMB2JYgC/OCKeC29g2cD4LgAA/nHO/D/4u7WhQIEkfckGvpl+mQfon8CL3KS3hbDsMKAeg3+8tuHnmTInVErUp7Co4RLi0W9VzGROsjCVwAA=",
+      "dominant": "#182808",
+      "source": "local:veritas-vinograd-put.jpg"
+    },
+    "about-1": {
+      "base": "/images/site/about-1",
+      "width": 1176,
+      "height": 786,
+      "widths": [
+        480,
+        800,
+        1176
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAABwBACdASoUAA0APu1iqU2ppaOiMAgBMB2JYgCdMoM0b0h1zlM7cTx/4liRmAD73OSHiniPjA8vCx8+KUc+zdLOj9xo/hAgg9bkIAcLD05TYkM82Ot1Nsii2ryJ6Cn8nDCyRE4LlicyzQb0D8iMTxWh71Z+Ptc1RSX+Qe5zt7bi/r9t/2a/64Toh30RWOWy2okjFsIoSxYCAAAA",
+      "dominant": "#f8f8f8",
+      "source": "local:photo-lineup.jpg",
+      "upscaled": true
+    },
+    "about-2": {
+      "base": "/images/site/about-2",
+      "width": 468,
+      "height": 624,
+      "widths": [
+        468
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBQCdASoUABsAPu1oq08ppiOiMBgIATAdiWYApKCAgYG8e9koMPzibwVyBHuu7exvD+/fPwAA/qrczyBPqLN60hmD+NC6QkD/hVU6D9zYyP6/wlVMD7Wjre3KtSCrbJROeeIWdLuIVoQoLIcCnVfMduTJ8twPEwB6zZI3eoaaeYj+MdJGn2i0IN97naCpI1Kl+/CcfPH4MWs0MPBNHIChH1BEQ8J5LyltfMfPNrsVsoVL9FW4GT04AfkBDmVIbfqTGwYKpwr3d4V9WHhHuZp5FJIW8sNZkfgqeDNm/DQ5zCqHDlf6vQHym8eeADlsjjzDH8CN1wIXalZ3AoLHXZpZJ9QAAA==",
+      "dominant": "#d8e8f8",
+      "source": "local:photo-terrace.jpg",
+      "upscaled": true
+    },
+    "vineyards-hero": {
+      "base": "/images/site/vineyards-hero",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JZACdMoGv/gNsLPRyQJv/kbiEgAD+hqfsiXRjccYxKjh23a+F0SGLaK12tHxtKf58mSWwjF+Jao9rX6IvxPiYkSMywUtBjofAAA==",
+      "dominant": "#382808",
+      "source": "local:dron-11.5.jpg"
+    },
+    "vineyards-1": {
+      "base": "/images/site/vineyards-1",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQBACdASoUAAsAPu1kqU2ppaOiMAgBMB2JaACdMoKP+AkIARnU4VafIAD+qdInpKvl0XOyXd7u2HFfvb1dK6bIq7W8mWhT7un3NhB3RpCQ6wqch2dgAA==",
+      "dominant": "#382808",
+      "source": "local:dron-8.5.jpg"
+    },
+    "cellar-hero": {
+      "base": "/images/site/cellar-hero",
+      "width": 525,
+      "height": 876,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRuQAAABXRUJQVlA4INgAAAAwBQCdASoUACIAPu1wsFKppiSipWmZMB2JYwDE2CD1moV/gjHJgUIXfKSsjeJKbDQfAADiNfDm3r7uUb69T5oTUsqsM/qVNnkYeNJiZDrEwAQSvOh8VDhO3eAK2+Vg8c8Ic76ZBsverBjDGLviSiRx7p59cnhP+77cNhpH8q6gkq+ywi70qOzUYv/FSX9d0QLSNFjeT4lEgCsBDfX0dOZ/RBrVZF9A3GJCgvCMAJGRqWw4AkrfqyTgG+wo64iiV3Q8SRuJF2VCnzB5xAiQBINZQMgfGZIAAAA=",
+      "dominant": "#080808",
+      "source": "local:photo-cellar-1.jpg",
+      "upscaled": true
+    },
+    "cellar-1": {
+      "base": "/images/site/cellar-1",
+      "width": 525,
+      "height": 375,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASoUAA4APu1iqU2ppaOiMAgBMB2JYgCdMoACT1a848R1ftX3AADgCF8nXPkeWHKrOj4DHXgmSoL3gfvOodoZzDcaMUKmO89hRW+GsTW6WjMv5eSzyH2anl/7CkeAv1ZA+mN+xOKu5tygBqC+1S2gAA==",
+      "dominant": "#985838",
+      "source": "local:photo-cellar-3.jpg",
+      "upscaled": true
+    },
+    "visits-hero": {
+      "base": "/images/site/visits-hero",
+      "width": 933,
+      "height": 624,
+      "widths": [
+        480,
+        800,
+        933
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JbAC7ACPOkF2rLZ1jrlmAAPfJp2mUbbPuWD3ycOFFPmepkrvqGCBq0YXUt8UyNBXbaKN6augOn/Zx+AwMerLT+ZcUgdg1bEAFEMla0Vj4PBMl62iuyA6/FQyMBuswo7iMIskWZF2jnAAA",
+      "dominant": "#386808",
+      "source": "local:photo-two-glasses.jpg",
+      "upscaled": true
+    },
+    "visits-1": {
+      "base": "/images/site/visits-1",
+      "width": 525,
+      "height": 657,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAADwBQCdASoUABkAPu1ur1IppiQiqAgBMB2JQBUfAQOwAPPX5n2QeCIz5OVmx9KU6b67VPTqJbbAAAD33jvl6M6CneyYU8HHt617AfzRrv/HepMmyrR6VIZYRRXIcwxJYSLpfh3Or9O8VfvBvotKtv9x2VxMJqWXS//pLcHW2C32MtSuhfxkJCFkPuqkF9iWzA1m7IAEK7MRHlyyUhmRj6v3IXh4GcAKb9con/S8rkhAl+kLXevS3Ol6rDlwAA==",
+      "dominant": "#d8c8c8",
+      "source": "local:photo-food.jpg",
+      "upscaled": true
+    },
+    "visits-2": {
+      "base": "/images/site/visits-2",
+      "width": 468,
+      "height": 624,
+      "widths": [
+        468
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAABQBQCdASoUABsAPu1oq08ppiOiMBgIATAdiUATpmyAL9Xe6BYIRcFqmLSgYyDtljqW4AAA/rQlo/vTeeu6UgVNQJCGruTGAaK+wgN6/EYZ3esmAM73c2zDWPWL8Qaunklu0G3Xr+rCyVhNbuy60oNg1/v1gZ4PUvb4+ZVAvDehlspZqujLNK1NCysVVWwnB8MOHq7l0rm5arraLtDW2aCyFV1LpQyQgmvOQnXxMfP9xXhdXfuT6cs8bNMdPgI81A1DbAzdhcqoVnOTN/AAAA==",
+      "dominant": "#384838",
+      "source": "local:photo-rose-glass.jpg",
+      "upscaled": true
+    },
+    "bottle-bela-harmonija": {
+      "base": "/images/wines/bottle-bela-harmonija",
+      "width": 232,
+      "height": 905,
+      "widths": [
+        232
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRtwDAABXRUJQVlA4WAoAAAAQAAAAEwAATQAAQUxQSB0CAAANoG3btmm7an2ubcW2bdtOnlLyF7a/In9hJ6+5fLNt29hnzTkeFkvuD0TEBJDU+f3jWvH3V+67QLoL8w5haMzGq0ambDb9KmLa97/LslpEIIYO/EGm8dU4ZzL9EpEdeGniSMP0JgoZECsyQeTJK1IH/WZ5UkX3D2RZhgA8GNntGAHdfwdkabKakazHnpyGEiYKi7b7oxBIoYSnUJbSrP8qyxoWp7V+ypKNwIR8NO6rfCEC09SPjewpmEDMeYdMYwYiueANnxGYTdIxNf7chYTCmCYCFIaOf1OWcGE25gBM658ncy0hSsCmZ7wMCGwm3bH073cTzk8chUuRb2957ALINuMrKcCB+x4w9pPtWP3b2y7ID5+HMuQ7mx/LXNhMiDIQB296jAOYy7PCv+zCkEWIHL6x86FYS6jkQBx4OMBuTPmW9t/UakQuX9vwZFKrAKb1z88iRPkc89+biymfmGQzC2Ht4RMQ+eXdhPGFMI0cWgyG1ymxaSrBKLOcbgmiXQKEUqyUlsro/VcvIfzeMxXCxNOpUgaXIColmKyE/31wZfxXL+OPrqmYKCz4u2VFzLk/O6iA6PzZ/KqqyLmE+RB8mBjfjYe/8M2Pf/4DWLU7ZNj0hYvv+u2T50xqWhCAiyHmt//G9zs02k1AAN7Xfn9pyOy+AZIZ9Kv1xntv/nr4zAoTgARVfr55Db14vL5l3vDu4MF//fLLdx+9+SYSAFZQOCCYAQAA0AgAnQEqFABOAD7tcK9SKaakIqZqATAdiUG2ALNzVYqyj0Z6U/0kJUqPXHHMJ5KvvrZLvzfS03b+zRHBbjefLJxRIlDpqhUKot4DuGLBYAD+yG77EdFsta+7kg5zbZ1pmeBORJ6Xg3ad4BNwa0zTDDlOQPVixHLTFiQrsx62xhzCv/WTP8AQYUZrWuFfmwGosHjvP/i+zTp7g5jdI8Y/JS3T64ky+o2peU1ZuUwR655AReGLjzmR/X/CIYlX09Cti6quf73BykD2at2a/eI2aH7aUX+7EH//KgGqFs4T+HyXHLHDHcdiO9yGWD2o8RhLY6RpuItPsvP3NSP6j7VioCQG8Jhn/QSiP2w6ytd9do74T9Itq0J0Dk1XkNLssfaljugd4825OpFBuCTf5E7i/4j2B5HaXKm3nM44o8Mx0COS9e2B84Jztjnm1JUws3ncqRroPSP49d7XWvNw1v/WOmkox/Psa2vougC6cQmzVdLRHkDgXBx79sbIlxLz98jSaU+BXq1A8b1SavTr/MtDVNUrDxbjawAA",
+      "dominant": "#d8d8d8",
+      "source": "local:bela-harmonija.png"
+    },
+    "bottle-domina-rose": {
+      "base": "/images/wines/bottle-domina-rose",
+      "width": 248,
+      "height": 897,
+      "widths": [
+        240,
+        248
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRsoDAABXRUJQVlA4WAoAAAAQAAAAEwAARwAAQUxQSAYCAAABoG3btiHZWhFxbNvnzbZt23q1bdu2bdu2bdvnZLW915rnnBuxd7T7BRExAUTkUMwhV54/vTgwBjkU6FEhCCCoRJ5JcSgRhfpmRcAAo6mJS5k+QwQ6L7lBDiV6BBZEZTJL/AQMIL/F49AE5cgLofL/ppLFEzAY9cwSPPBpYRb7lk8jE3JpLzQEdYw82g4NRnuL3dDQ6EzRghyKdhkMjU5mMa759DCLdcNnsFnCR2AoTDNxKe0HCBTWkmuS6QsEGqcccgIcyvwQDMGbxAYuZX3l8zMDuQY5BAIBFzXwaDA0AIUlQQ4lfQoGwLgfjxwfjyqDAUCAcuQFTIP+DxSm+DkU/w7Yh/E4MTlE5FF1CPwZLcnzWQodoLGHHCKH0ryFBAgiecgljzqAEawxgjwi74wR425icii3ghiIoBJ51AMaphq9yaONFoxLLsV/CjYS/M5FuTXECBrtqTEY5goTqCeUhcZWGmXFuEQzQ3gca46V4H3qhSH8zLYB2upXjo0hcOENIaD0Fiswqu+wU2iyP4x2y6HsOq0Io+sxsN2wI2GM2AxtozFnXxhrT4LtNh+Btjt0DGx35Lod4/KtMK7eCOPSS/kFMdO4eXrcZbAYRX6uunINUY+/G6gIo92ACF4eViz/VUpFRfAhAy2EIJAFgq+dyXXLjN1/5+X7zx/fv75/dvPYhqnIAVZQOCCeAQAA8AgAnQEqFABIAD7tbK1QqaYkIqm1W2kwHYlqAMEP+8woY5nvV8FFbt0EQCnI9EJfkYJFRUEf019tFnaJu8MXN+9p2MNZdkFEEKi9ggdN8AAA/sT5a54Vcl7a8yTGxA2RTTCRPpiumPMIZFNuHlIEEbPRJQHDoZgt2ZtxO1uk/RY3T+JTIpHf+fMKp3ETUsOWi/TMg7ZlEyfHzVDQFYUsFcaiFuNvTe/tAofMdRo6aFHHzQkV1wmLEDRaNkSy3//3igssrmy6BYI6vB5icf3wots2bEbDT0JRzxBs4Cg3NCiyrO8LsDzfdR9JRRf3HZDnxW0VxUnfEhGcYT1p15Z+/Hgc4Ix6URVcLnU6zK4HBlAOkcsN9jrZWsEyuKZ3+sfAdIxKil8WWLdx8h8itLjI5yFALScxz2GnH3zfJjZyY9yCUBgCdM36E6plXm4J8hUtxtmCB4oNI1cWn2ijp69Zck1gNxj5TSKFlFtf34hqyTWSvCyi+viHYbYVo5cGOd4t5yL1X0XuMuFHGz8FdGqSXnWjdMwdrmhhrm+kMfQA",
+      "dominant": "#d8d8d8",
+      "source": "local:domina-rose.png"
+    },
+    "bottle-monte-karlovci": {
+      "base": "/images/wines/bottle-monte-karlovci",
+      "width": 220,
+      "height": 903,
+      "widths": [
+        220
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRnADAABXRUJQVlA4WAoAAAAQAAAAEwAAUQAAQUxQSKgBAAABkLNtmyHZ8r/G+ti2zdC2zdAn84ntzFxFR5lt27ZtfFX1HnRXfYuImAD6Pxyw5vTzY8sbkkexAY2GBjTOBOTFhLQEP5RR+ntN8mMC2gAGYNDCaqVASLOgAIPPVS0C6g4DaNxMJc+ic9StNKtWMakWPjUH8t5NkXuFrFr+Z/CyNPkWdTQMNO4WJM+i8q+Ip8Wtqv6GgcHL0lZVfkW8K0++RXWO+FHDqhkAGKChVRsYABp9KIhJoNlQABSyKPQiQmr+AQaRQyj8L6C2T2Hwv8G3yeQT+dT9GzSijcJs8ogafoBCvGaMpYC2gWGr8aoStWQDe8Zsmgd20LicdADaweBH1acwDjDo8EKiu0g3ka5P3TT6XIV2G3NZ5GJ+M1pAYYIAY5qAwpRcM1WAMU9kkcxxkb1Qbgt3SSwTSc9bu0U2SWSkg93SM9wUNqVLbBfZlaf2CWicXyNxaZHExVxzScDg3nyJ+1Oh3F5MA7u9GgflonGrBZwZ6XW1k0JGte8wDr+wKukKmJXSkUqxMhhCHe/A8foI8ii1/azsozcePXx4//zeDTM7pZAHVlA4IKIBAADwCACdASoUAFIAPu1uq1EppiOiqBqriTAdiUAZVwGwy/wzh9HBVOM6c86GmQOGSSs7Fn3/YAL04UrVn87DP9FJnYhdrnw6BTEVKD/1rdsAVAD90oTC0IqMHzJReo7t13GzeZn2VcQDrC/UrzOupMICITmNwgtv3t7MZjEYSTbVSF2QoDHh35x4rxetC7kdkF1pvMVIAII+OM18LaUY5Xi2vBVSWFWp+ECiLtLv8Fhr0Az8vWE3KDxDalbLAhvVeZH2+iyVUp/1WCO6PIfFQbIJ6gLre6FXpWkF33oFBZCXmmb78H+INJm1u+ZNbWIS3eAfQvGQ1ay6x1VzBDW8lwG1Bz1kS0Vb6XLQUY1sHUX1ZqRgfLaif27MeQ4NdZdGK3QzZVlsOJ+Ri4a+RIeqP5uomRSsy6cZM6SK1c3RCeRZ1/4YEuTdfOb/VK67JtmQ5F3eF5S8P2Xs0Pb+76QVVXNPILbPKd9z5Y+8TUYYFrNind4rKTFmxqZ5vaJ/fKyg1BMq1iBZdW/TZcPS53rDOugbc3OI4dhLJ8Y823flPRbARsAA",
+      "dominant": "#080808",
+      "source": "local:monte-karlovci.png"
+    },
+    "bottle-cuk-cuvee": {
+      "base": "/images/wines/bottle-cuk-cuvee",
+      "width": 239,
+      "height": 904,
+      "widths": [
+        239
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRpADAABXRUJQVlA4WAoAAAAQAAAAEwAASwAAQUxQSLkBAAABkLNtmyHZ8r+qPTYi2459TmjbNiMrt22fyLZt27bRXd/3HvRUfdeJiAmgf9O333zu0cUdPcnTUhkHgeBbSbIeFdixsPys4lURAATOr8RPCARRZQ9DdBYOjDsZyKQgQ8cTbqTzO5HwMLPfcTgI3ubW+FLQ71jC5wI+lnYmfCtGNiyu7GPoeIKrqoGalOZzAg5g1PM7+o9DM7/DSS19iE7+E6MHpUtl6HhSfw9DuR6CAYcVlD7JpKehYACCqAal+8dY6vkdAgCCF23IGjImbR6cIFEYU8iQoQWIBCk5xmSy1BWxwFNitKDst8DwdriUpRMcAh2ar9ZYdBkcwjj9EhIiePhU5RpY4YLKQTiFzSrrVZYiDns0K4xxa4rGmQkaZ0fBKfRXGaDSSaUhWKGuSjWIQmUEM85WBCSs2Pf/Jd87jbzPwGFZ72jYCxp0Bk7huMoele0qaxXO0XyF4zQxyGE3jUGsME5lmEoflc5wCi0U9lA9cNAuyv4YHNKL0u6E/EJvSn8HceSSJIa8RDdLC/Hz05eImdn9/MKCl4UtFT0CQUrB9yPViYjSV+4+dcOpSxcvbJw5vFlhSwYAVlA4ILABAAAwCgCdASoUAEwAPu1srFEppiQiqakhMB2JZADIYbxlMlw7IvZgW7N8cFE3/dR157cgDEJ68NsLXNTY92WU+lCaX8NVSmINi3DlPNRrdku2e1z0CAFBOPutQDAA/rAI4Y1UI8XFQkYMb8lrShFz34IXSQafi7u2XFm2QMlQzc2vZFZ49LCxziAYkC18fC6NZOccAvLGEiq+thP+tYRLz9E28xhgGt/hzvT/9oAKBpwP+zyKoyW+QbXoDLgNhPNEoLUZxCaE2WBYu/nKXhiYD8Y5IQV6hNOT6HD3s0bTtaH6tOlg0vVCwOyguPazYF+0webTpLW9q1rUmB9ypts3Z+lFxGi+gD1V9I3ds3XAZUawPyXOvPQ4X8W9iWLMfV45TNnPjFTaXMNkhcVo6aRKaYuF4l7/uuJxkm/i+uhM5wjRKFFk6nUqNyjWdR5eUd5Z5O2HMAe8WFnkMiZ//ahx77rjya3kcp1vT+h/4/PhgSwCvMeEHx6zbhy7uCAVDNzYz+Tjla4+fkjwDTLv7DB9/PXItm14Qi7omAFLOcqA20vKDs+l40/J8R3fmRwlhOyIAAA=",
+      "dominant": "#d8d8d8",
+      "source": "local:cuk-cuvee.png"
+    },
+    "bottle-momentum": {
+      "base": "/images/wines/bottle-momentum",
+      "width": 208,
+      "height": 922,
+      "widths": [
+        208
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRuwDAABXRUJQVlA4WAoAAAAQAAAAEwAAWAAAQUxQSOYBAAABoGzbtiHbWoFr35JVs23bRrsl27636Fu1bdu2bdv2exFr71mIiL1Xyy+IiAkgInKo1tKjZzYMyEoOJbpU6zc0GCPIS/JoIv5X6n/sIMdkHRhQeJWZHIN9EY3P2Y0WRRTupjUaFGEcI8MEhZs+OXaP0tlpfMgm8TFlPmSV+JHHaHDcn8LkGvQWqQ0VCcoY1YxTlSWC0hJ/CktwOaNacbqaUScwAEYP8g0WJ+wjx4nxqLOCBgCNqeQ4RORRjwAasYzVPjnkUXulNeJ1gPnkEOV7AUayDtGLPHcHGKYKr/NQGzDMQ/SlJQgtFB7l3Am2epvrHJQFFLresGN0v2qnUF2klkhNkXoCjHZXJPo+gbab/05igciSu1B2iy+LXJNYclFi8VGw3Yo9Epv3SWzfJLFrEUKBZSJzRaakzFSRSSLDwAJDUqYHlEA3kS6psrchtN2purBmnKkGaKvTJVmiuEhJZaVwuUhgxbiQ65fAaZGzuX4KnEh3G8pqp39Z4JjIWToJtjoW0VbueTAMdeQM7QP/00mI7KCOi64/5wTFgPrcgSru/K6RqBXAH1pTg/9hEFVfGlLzfyGMVYDGVPYPFHPIzGHIrBWuZXapxydoJGr82FyYyKGcjcfOXH3kxMkDy2YMqJ+HHAdWUDgg4AEAAJAKAJ0BKhQAWQA+7WaiTamloqIwGqwBMB2JQBlIV4Oz+YWwLqhgxZax0As7AG6l+b2D5HRXnzRFay82KGfFkNSEH3HnvpcFItWksDzPihwHjxWvDJdOIjAKbz3eAADvPsJLCM8tezE1rH+qbYMq8YQk5XtMre9tP7Jz/7ZU5ZdPlQHKhNDFER+hRzgjFgLJ/ZyUPWosvOzNUaEU0tZanWU391hrfk8uJD/Pjwlnwuz+Cv8UIejUb/E5er/NtBLLPUbSRQeVxAmWpM/a+ZHf+pQV9QllPo/6tL3V/oRt/7lt5QlrdStLFUF2JbyBWn3bw9pATn3YWQayjtoGdF3NpH276Az0NsZctNYqUlDQ3eFm+AH1UCNWk71Zr9ByBl4bE0fRWYdsXVOy0X7yIVItqrDWJCnFczUuH7ESVP48YZ6hIRm6/68Xm0TnvVRNWEu0kdfmyoawEc+QLeyhuPCi4Yx6G3wpfHBssVu49eOLyp1D8CsRCDpW1xaFzQ3Ccf8k/syclnnQlWAsQau3S9TBChl8WpZjx9PJk6E182S2VZE5hO3uSEaEAmsfC1PQFUA7wcIQw8PQQHjDYdB00xDgUKJtBDRblsZNc0GQucCQ5w2/7/XmUFLG8KjmoIZ+lfgAAA==",
+      "dominant": "#d8d8d8",
+      "source": "local:momentum.png"
+    },
+    "bottle-bermet": {
+      "base": "/images/wines/bottle-bermet",
+      "width": 167,
+      "height": 964,
+      "widths": [
+        167
+      ],
+      "formats": [
+        "webp",
+        "png"
+      ],
+      "alpha": true,
+      "lqip": "data:image/webp;base64,UklGRjAEAABXRUJQVlA4WAoAAAAQAAAAEwAAcgAAQUxQSMABAAABkLNtsxlMk+Tz+gdsbVe2bXR2y8q2bXu3tW3btp3NmXmL5JzMuo2ICaC433/v6XtvXl8/1Ik8SvSpXAgBIHhelPyEgJoiZBZhgxoUWNrDAIAIajt0c6jr0MECVLL4VC6CAGDcziPPUuaH5QJZfSoXWS7aAqoOUagHRrq6KvX+WnVUGqp0hVFopVIHrFDPdtalTpLBAfJsrWGStrl0tW136fxbdbVtcxls20G+bW0S434R8mIB1YkgMTCGUEBEPhV7BEGiIGpOAXlU4CgMrIIXpckPaCIiOBrs9onKfoG4wKAb0RwYODNOZRZ5CHGDoFYjCFIajBoIkybCxmmI0jDOrda4rnL111mpshlG4ZDKAZV9Koc0Lh9MZ3BUZZfKbpVdf4WtChFWqqz6r1mpMl3BYJLK2EMa4/arXAAr3IUo3FO5/zuNVRmnMkJltMoAld4qff8KfVT6qnRXYLRWafLLNFMQVL8HgbgBZR9CkFJQ8QLEfHMSfCu2CnhzBOLAuFlgFfDicKo14PAjXGPLEME9thghJMX1Aqvw3RhmFhFmZhPiXFaz7xA4G8wiKtlvwe5ztx6+efvuyb3Lp/et75lLVlA4IEoCAAAQDQCdASoUAHMAPu1mq1GppSOiqhZroTAdiWMAyvwShHEjhqRby899R0cDCK66pp+oAu1vuiHK7HZyox/kHK7DsvY2MSu2uZ7uGMVCttSqwwur4Iv0MnM3dzMdB3Q0kIn2LLwPzYO8NQsJz/V5ZzghAAD+FSlI2hVeSuPvMo98SVGXVyf5wbQXG0YO81tV6jA5YeKjGlbx0RcH06/gBlLo1q+uk7VkGx+1Wf/+4S0WC7VBxa6GMlgD9im9nRQRx2bO48rjihOtdvZTg9598Zh1XTN5VcL1ORqWT4PAjF9neVOD0Ldpwn3hfIHGhd4csuL4simP6O9LCcn+lff+2RC/HcsJ9ACh5z5uHl7GOVJ4QWuyphFm4xTDtx1PJ8tw4tTtXrb5IduRMUFun5HcAHd1Gm1nst8/UX9Tt+seKHnQn+NRSDwelSBcIenNN5QaW1YF1WFXjMVvaJAqoJUxu9KOpRa+z6LgXBzNFh9lKqSzzhvdMU8fP5rTnDP5X9YkeAfDwzf68qDGhn2igIqLReVrDSiaHRAGDZR6ziwYWZG7x7Zojv4omLUxrubuz6UvU9Pz8bCaf9BAX7IcSiqODSQtpF2ibgkp5LpyMvkxwKCtW9aXtT3zCHVhWQSXFIbdRgdeKlCo5mEMlzDI5w9tLTHf9sygre9BiuGzWTuVSmSa4JskFrvBZjQQeYz/8RZhSBhc8y69qr9MPL5UjT2Fd3/pq+YN0cliwZonAsJM1PBTic8NfrNiXL0FlWsngxLo+UM8nAW7XfbHEAAA",
+      "dominant": "#080808",
+      "source": "local:bermet.png"
+    },
+    "photo-two-glasses": {
+      "base": "/images/site/photo-two-glasses",
+      "width": 933,
+      "height": 624,
+      "widths": [
+        480,
+        800,
+        933
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADwAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JbAC7ACPOkF2rLZ1jrlmAAPfJp2mUbbPuWD3ycOFFPmepkrvqGCBq0YXUt8UyNBXbaKN6augOn/Zx+AwMerLT+ZcUgdg1bEAFEMla0Vj4PBMl62iuyA6/FQyMBuswo7iMIskWZF2jnAAA",
+      "dominant": "#386808",
+      "source": "local:photo-two-glasses.jpg",
+      "upscaled": true
+    },
+    "photo-lineup": {
+      "base": "/images/site/photo-lineup",
+      "width": 1176,
+      "height": 786,
+      "widths": [
+        480,
+        800,
+        1176
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAABwBACdASoUAA0APu1iqU2ppaOiMAgBMB2JYgCdMoM0b0h1zlM7cTx/4liRmAD73OSHiniPjA8vCx8+KUc+zdLOj9xo/hAgg9bkIAcLD05TYkM82Ot1Nsii2ryJ6Cn8nDCyRE4LlicyzQb0D8iMTxWh71Z+Ptc1RSX+Qe5zt7bi/r9t/2a/64Toh30RWOWy2okjFsIoSxYCAAAA",
+      "dominant": "#f8f8f8",
+      "source": "local:photo-lineup.jpg",
+      "upscaled": true
+    },
+    "photo-vineyard-poplars": {
+      "base": "/images/site/photo-vineyard-poplars",
+      "width": 894,
+      "height": 894,
+      "widths": [
+        480,
+        800,
+        894
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBACdASoUABQAPu1oqk+ppaOiKA1RMB2JQBhWbIAsuNE7ctbnUh+3DD24zWyAAP6x92MKNxBrndLDvNPZrD+kdqePvl+kxyZn0t3rt4doTaxOT2JG7ri1qyPW5iUgSIYTwfhopCR1eMBHyxBnnMKZfKNJsDds3es81QZ7rrQRuJygwqKWs3XTtyygq9d8xiwaX1k1Zcuciuxwb16tAAAA",
+      "dominant": "#181808",
+      "source": "local:photo-vineyard-poplars.jpg",
+      "upscaled": true
+    },
+    "photo-grapes": {
+      "base": "/images/site/photo-grapes",
+      "width": 468,
+      "height": 624,
+      "widths": [
+        468
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRgwBAABXRUJQVlA4IAABAABQBgCdASoUABsAPu1gq1AppSOisBgIATAdiWwAnSEhif43nXCeS7r/uIty6Oa2PgGBFNDLYgJCUt7yEAD9+9Fa1ojnPPJ0fBTpjJ5uB/PT1T2kGjPMowkNeka976oohZpp6NrT8YUoGxomZ48hFMmvPRYby4L/6FLbeHGQznhKdydQsaxa1HbW292u7OaRflpJMQV72oYEKiDkxmoSR7D7lgbkieUoe5UsOSHQM4SINZtUIYLCkzFuhsRygMoRBQLWpuAhD45HePOCD/WoByv7OrREN9mBFqV9eEeHT9dTSCYLGO5lbGzn0IkIRmdlCLHz+RlhOUits4rPLj16AAAA",
+      "dominant": "#f8a888",
+      "source": "local:photo-grapes.jpg",
+      "upscaled": true
+    },
+    "photo-rose-glass": {
+      "base": "/images/site/photo-rose-glass",
+      "width": 468,
+      "height": 624,
+      "widths": [
+        468
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAABQBQCdASoUABsAPu1oq08ppiOiMBgIATAdiUATpmyAL9Xe6BYIRcFqmLSgYyDtljqW4AAA/rQlo/vTeeu6UgVNQJCGruTGAaK+wgN6/EYZ3esmAM73c2zDWPWL8Qaunklu0G3Xr+rCyVhNbuy60oNg1/v1gZ4PUvb4+ZVAvDehlspZqujLNK1NCysVVWwnB8MOHq7l0rm5arraLtDW2aCyFV1LpQyQgmvOQnXxMfP9xXhdXfuT6cs8bNMdPgI81A1DbAzdhcqoVnOTN/AAAA==",
+      "dominant": "#384838",
+      "source": "local:photo-rose-glass.jpg",
+      "upscaled": true
+    },
+    "photo-terrace": {
+      "base": "/images/site/photo-terrace",
+      "width": 468,
+      "height": 624,
+      "widths": [
+        468
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBQCdASoUABsAPu1oq08ppiOiMBgIATAdiWYApKCAgYG8e9koMPzibwVyBHuu7exvD+/fPwAA/qrczyBPqLN60hmD+NC6QkD/hVU6D9zYyP6/wlVMD7Wjre3KtSCrbJROeeIWdLuIVoQoLIcCnVfMduTJ8twPEwB6zZI3eoaaeYj+MdJGn2i0IN97naCpI1Kl+/CcfPH4MWs0MPBNHIChH1BEQ8J5LyltfMfPNrsVsoVL9FW4GT04AfkBDmVIbfqTGwYKpwr3d4V9WHhHuZp5FJIW8sNZkfgqeDNm/DQ5zCqHDlf6vQHym8eeADlsjjzDH8CN1wIXalZ3AoLHXZpZJ9QAAA==",
+      "dominant": "#d8e8f8",
+      "source": "local:photo-terrace.jpg",
+      "upscaled": true
+    },
+    "photo-cellar-2": {
+      "base": "/images/site/photo-cellar-2",
+      "width": 831,
+      "height": 624,
+      "widths": [
+        480,
+        800,
+        831
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBACdASoUAA8APu1iqU2ppaOiMAgBMB2JYgCdMoMYJn/AfHKXlpTu8Jq6pBcAAP14YM5rPIqKnX3F/VyzC8A8bl+7IHirAmPqlXt9vhRqu+nIRu3iJdYxjygcvS9pbkJvFx8B+VUcgy5OpoI1UFgil8Hzu/kCRl/VvdRHHzbPazI4AnOffGZAAAA=",
+      "dominant": "#987868",
+      "source": "local:photo-cellar-2.jpg",
+      "upscaled": true
+    },
+    "photo-cellar-1": {
+      "base": "/images/site/photo-cellar-1",
+      "width": 525,
+      "height": 876,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRuQAAABXRUJQVlA4INgAAAAwBQCdASoUACIAPu1wsFKppiSipWmZMB2JYwDE2CD1moV/gjHJgUIXfKSsjeJKbDQfAADiNfDm3r7uUb69T5oTUsqsM/qVNnkYeNJiZDrEwAQSvOh8VDhO3eAK2+Vg8c8Ic76ZBsverBjDGLviSiRx7p59cnhP+77cNhpH8q6gkq+ywi70qOzUYv/FSX9d0QLSNFjeT4lEgCsBDfX0dOZ/RBrVZF9A3GJCgvCMAJGRqWw4AkrfqyTgG+wo64iiV3Q8SRuJF2VCnzB5xAiQBINZQMgfGZIAAAA=",
+      "dominant": "#080808",
+      "source": "local:photo-cellar-1.jpg",
+      "upscaled": true
+    },
+    "photo-food": {
+      "base": "/images/site/photo-food",
+      "width": 525,
+      "height": 657,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAADwBQCdASoUABkAPu1ur1IppiQiqAgBMB2JQBUfAQOwAPPX5n2QeCIz5OVmx9KU6b67VPTqJbbAAAD33jvl6M6CneyYU8HHt617AfzRrv/HepMmyrR6VIZYRRXIcwxJYSLpfh3Or9O8VfvBvotKtv9x2VxMJqWXS//pLcHW2C32MtSuhfxkJCFkPuqkF9iWzA1m7IAEK7MRHlyyUhmRj6v3IXh4GcAKb9con/S8rkhAl+kLXevS3Ol6rDlwAA==",
+      "dominant": "#d8c8c8",
+      "source": "local:photo-food.jpg",
+      "upscaled": true
+    },
+    "photo-cellar-3": {
+      "base": "/images/site/photo-cellar-3",
+      "width": 525,
+      "height": 375,
+      "widths": [
+        480,
+        525
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASoUAA4APu1iqU2ppaOiMAgBMB2JYgCdMoACT1a848R1ftX3AADgCF8nXPkeWHKrOj4DHXgmSoL3gfvOodoZzDcaMUKmO89hRW+GsTW6WjMv5eSzyH2anl/7CkeAv1ZA+mN+xOKu5tygBqC+1S2gAA==",
+      "dominant": "#985838",
+      "source": "local:photo-cellar-3.jpg",
+      "upscaled": true
+    },
+    "veritas-vinograd-put": {
+      "base": "/images/site/veritas-vinograd-put",
+      "width": 968,
+      "height": 340,
+      "widths": [
+        480,
+        800,
+        968
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAwCdASoUAAcAPu1iqU2ppaQiMAgBMB2JYgC/OCKeC29g2cD4LgAA/nHO/D/4u7WhQIEkfckGvpl+mQfon8CL3KS3hbDsMKAeg3+8tuHnmTInVErUp7Co4RLi0W9VzGROsjCVwAA=",
+      "dominant": "#182808",
+      "source": "local:veritas-vinograd-put.jpg"
+    },
+    "dron-0-7": {
+      "base": "/images/site/dron-0-7",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZACdMoACXyuXoyawx9e4UAD+3F+o2XdTc4d2Dzv7uuJBtyJy3SbS+Qdb7FuAve/7lMeuwAA=",
+      "dominant": "#382808",
+      "source": "local:dron-0.7.jpg"
+    },
+    "dron-3-5": {
+      "base": "/images/site/dron-3-5",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JaACdMoACtA5b46PFkYnMAAD+0CJ1+hvscE+tRm1W89uqGEM2WD5I5IAeoMoVjTbnE2CmgrD12AAA",
+      "dominant": "#483818",
+      "source": "local:dron-3.5.jpg"
+    },
+    "dron-6-5": {
+      "base": "/images/site/dron-6-5",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JaACdMoKP+Any5+rkDJy4VAAA/sAD23jXFg7vqWWRsHay8Yi+OWyyNZrNBId4oBcPwkC4dJ9fxBxOgAA=",
+      "dominant": "#382808",
+      "source": "local:dron-6.5.jpg"
+    },
+    "dron-8-5": {
+      "base": "/images/site/dron-8-5",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQBACdASoUAAsAPu1kqU2ppaOiMAgBMB2JaACdMoKP+AkIARnU4VafIAD+qdInpKvl0XOyXd7u2HFfvb1dK6bIq7W8mWhT7un3NhB3RpCQ6wqch2dgAA==",
+      "dominant": "#382808",
+      "source": "local:dron-8.5.jpg"
+    },
+    "dron-9-8": {
+      "base": "/images/site/dron-9-8",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JYgCdMoR3ACXBPFMR09ygz2egAP6pVVaRvkBD5Km2y60mQavdEdrWI3ianERjqq/KEx9xOUKU68V12t7oUAAA",
+      "dominant": "#885838",
+      "source": "local:dron-9.8.jpg"
+    },
+    "dron-11-5": {
+      "base": "/images/site/dron-11-5",
+      "width": 1920,
+      "height": 1080,
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1920
+      ],
+      "formats": [
+        "avif",
+        "webp",
+        "jpg"
+      ],
+      "alpha": false,
+      "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JZACdMoGv/gNsLPRyQJv/kbiEgAD+hqfsiXRjccYxKjh23a+F0SGLaK12tHxtKf58mSWwjF+Jao9rX6IvxPiYkSMywUtBjofAAA==",
+      "dominant": "#382808",
+      "source": "local:dron-11.5.jpg"
+    }
+  },
+  "galleryExtra": [],
+  "missing": [
+    "hero-mobile",
+    "about-hero-mobile",
+    "vineyards-hero-mobile",
+    "cellar-hero-mobile",
+    "visits-hero-mobile",
+    "gallery-1",
+    "gallery-2",
+    "gallery-3",
+    "gallery-4",
+    "gallery-5",
+    "gallery-6",
+    "gallery-7",
+    "gallery-8",
+    "gallery-9",
+    "gallery-10",
+    "gallery-11",
+    "gallery-12",
+    "gallery-13",
+    "gallery-14",
+    "gallery-15",
+    "gallery-16",
+    "gallery-aca_8470",
+    "gallery-aca_8508",
+    "gallery-aca_8524",
+    "gallery-aca_8562-2",
+    "gallery-aca_8566",
+    "gallery-aca_8573",
+    "gallery-aca_8574",
+    "gallery-aca_8631",
+    "gallery-aca_8632",
+    "gallery-aca_8649",
+    "gallery-aca_8652",
+    "gallery-dji_0047"
+  ],
+  "logoSvg": "/images/brand/veritas-logo.svg"
+}

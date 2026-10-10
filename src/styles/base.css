@@ -344,8 +344,13 @@ address {
   display: inline-block;
   height: 44px;
   background: var(--logo-color, var(--krem));
-  -webkit-mask: var(--logo-url) center / contain no-repeat;
-  mask: var(--logo-url) center / contain no-repeat;
+  /* mask-image is set inline (relative URL resolved against the page) */
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 .logo--gold {
   --logo-color: linear-gradient(120deg, var(--zlato) 0%, var(--zlato-light) 45%, var(--zlato) 60%, #a8843f 100%);

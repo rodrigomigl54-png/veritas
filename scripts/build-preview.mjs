@@ -42,7 +42,7 @@ let html = await fs.readFile(path.join(outDir, 'index.html'), 'utf8');
 const boot = `<script>globalThis.__VERITAS_PREVIEW__={map:${JSON.stringify(map)}};</script>`;
 const fix = `<script>(function(){var M=globalThis.__VERITAS_PREVIEW__.map;function L(v){return v&&M['/'+v.replace(/^\\.?\\//,'')];}
 document.querySelectorAll('[src],[poster]').forEach(function(e){['src','poster'].forEach(function(a){var d=L(e.getAttribute(a));if(d)e.setAttribute(a,d);});});
-document.querySelectorAll('[style*="--logo-url"]').forEach(function(e){var m=e.style.getPropertyValue('--logo-url').match(/url\\(['"]?([^'")]+)/);var d=m&&L(m[1]);if(d)e.style.setProperty('--logo-url',"url('"+d+"')");});
+document.querySelectorAll('[style*="mask-image"]').forEach(function(e){var m=(e.getAttribute('style')||'').match(/mask-image:url\\(['"]?([^'")]+)/);var d=m&&L(m[1]);if(d){e.style.webkitMaskImage="url('"+d+"')";e.style.maskImage="url('"+d+"')";}});
 document.querySelectorAll('video').forEach(function(v){v.load&&v.querySelector('source')&&v.load();});})();</script>`;
 html = html.replace('<head>', `<head>${boot}`).replace('</body>', `${fix}</body>`);
 await fs.mkdir(path.join(root, 'preview'), { recursive: true });

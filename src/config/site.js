@@ -102,8 +102,8 @@ export const site = {
   aboutVideo: null,
 
   legal: {
-    terms: '/uslovi-koriscenja.html',
-    privacy: '/politika-privatnosti.html',
+    terms: 'uslovi-koriscenja.html',
+    privacy: 'politika-privatnosti.html',
   },
 };
 

@@ -27,6 +27,8 @@ function veritasRender() {
 }
 
 export default defineConfig({
+  // Relative asset URLs: works at the domain root and under a sub-path (GitHub Pages /veritas/).
+  base: './',
   plugins: [veritasRender()],
   build: {
     target: 'es2020',

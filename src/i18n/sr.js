@@ -217,7 +217,7 @@ export default {
     cod: 'Plaćanje pouzećem',
     card: 'Online plaćanje karticom — uskoro',
     age: 'Potvrđujem da imam najmanje 18 godina.',
-    termsHtml: 'Prihvatam <a href="/uslovi-koriscenja.html" target="_blank" rel="noopener">Opšte uslove korišćenja</a> i <a href="/politika-privatnosti.html" target="_blank" rel="noopener">Politiku privatnosti</a>.',
+    termsHtml: 'Prihvatam <a href="uslovi-koriscenja.html" target="_blank" rel="noopener">Opšte uslove korišćenja</a> i <a href="politika-privatnosti.html" target="_blank" rel="noopener">Politiku privatnosti</a>.',
     submit: 'Pošalji porudžbinu',
     sending: 'Slanje…',
     successTitle: 'Hvala na porudžbini! Kontaktiraćemo Vas radi potvrde.',

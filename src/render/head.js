@@ -43,7 +43,7 @@ export function renderHead({ publicDir }) {
     description: loc(w.description, 'sr'),
     brand: { '@type': 'Brand', name: site.name },
     category: loc(w.specs.type, 'sr'),
-    ...(imageUrl(w.image, 480, 'png') ? { image: `${site.url}${imageUrl(w.image, 480, 'png')}` } : {}),
+    ...(imageUrl(w.image, 480, 'png') ? { image: `${site.url}/${imageUrl(w.image, 480, 'png')}` } : {}),
     offers: {
       '@type': 'Offer',
       price: w.price.toFixed(2),
@@ -55,12 +55,12 @@ export function renderHead({ publicDir }) {
   }));
 
   const icons = [
-    exists(publicDir, 'favicon-32.png') && '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">',
-    exists(publicDir, 'favicon-16.png') && '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">',
-    exists(publicDir, 'apple-touch-icon.png') && '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">',
-    exists(publicDir, 'icon-192.png') && '<link rel="manifest" href="/site.webmanifest">',
+    exists(publicDir, 'favicon-32.png') && '<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">',
+    exists(publicDir, 'favicon-16.png') && '<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">',
+    exists(publicDir, 'apple-touch-icon.png') && '<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">',
+    exists(publicDir, 'icon-192.png') && '<link rel="manifest" href="site.webmanifest">',
   ].filter(Boolean);
-  if (!icons.length) icons.push('<link rel="icon" href="/favicon.svg" type="image/svg+xml">');
+  if (!icons.length) icons.push('<link rel="icon" href="favicon.svg" type="image/svg+xml">');
 
   return `<title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">

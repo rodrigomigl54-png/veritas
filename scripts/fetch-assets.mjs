@@ -18,6 +18,24 @@ const cacheDir = path.join(root, '.cache/assets');
 const publicDir = path.join(root, 'public');
 export const manifestPath = path.join(root, 'src/config/image-manifest.json');
 const force = process.argv.includes('--force');
+// `--from <folder>`: use original files from a local folder (e.g. images saved from the old site),
+// matched by file name (bela-harmonija.png, 2022-pocetna-2.jpg, DJI_0047.jpg …). URLs are the fallback.
+const fromIdx = process.argv.indexOf('--from');
+const fromDir = fromIdx > -1 ? path.resolve(process.argv[fromIdx + 1]) : null;
+let localFiles = null;
+async function localIndex() {
+  if (localFiles || !fromDir) return localFiles || new Map();
+  localFiles = new Map();
+  const walk = async (dir) => {
+    for (const e of await fs.readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) await walk(full);
+      else localFiles.set(e.name.toLowerCase(), full);
+    }
+  };
+  await walk(fromDir);
+  return localFiles;
+}
 
 const PHOTO_WIDTHS = [480, 800, 1200, 1600, 2400];
 const BOTTLE_WIDTHS = [240, 480, 800];
@@ -46,6 +64,12 @@ async function download(url, dest) {
 }
 
 async function fetchFirst(id, candidates) {
+  const local = await localIndex();
+  for (const url of candidates) {
+    const name = path.basename(new URL(url).pathname).toLowerCase();
+    const file = local.get(name) || local.get(name.replace(/-\d{2,4}x\d{2,4}(?=\.\w+$)/, ''));
+    if (file) return { url: `local:${path.basename(file)}`, file };
+  }
   for (const url of candidates) {
     const ext = path.extname(new URL(url).pathname) || '.jpg';
     const dest = path.join(cacheDir, `${id}${ext}`);
@@ -146,6 +170,9 @@ export async function processImage(id, meta, src) {
   }
 
   const lqipBuf = await sharp(input).rotate().resize({ width: 20 }).webp({ quality: 40 }).toBuffer();
+  // Dominant colour → used to tint each section so the palette follows its background photo.
+  const { dominant } = await sharp(input).stats();
+  const hex = '#' + [dominant.r, dominant.g, dominant.b].map((c) => c.toString(16).padStart(2, '0')).join('');
   return {
     base: `/images/${group}/${id}`,
     width,
@@ -154,6 +181,7 @@ export async function processImage(id, meta, src) {
     formats,
     alpha,
     lqip: `data:image/webp;base64,${lqipBuf.toString('base64')}`,
+    dominant: hex,
     source: src.url,
     ...(transparentFixed ? { backgroundRemoved: true } : {}),
   };
@@ -275,7 +303,7 @@ async function main() {
   if (manifest.missing.length) log('missing:', manifest.missing.join(', '));
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error(err);
     process.exit(1);

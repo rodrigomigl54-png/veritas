@@ -65,7 +65,7 @@ function groundTexture(maxAniso) {
 
 // Grape-leaf texture (5 lobes, veins) drawn on a canvas — used with alpha test on leaf cards.
 function leafTexture(maxAniso) {
-  const S = 128;
+  const S = 256;
   const c = document.createElement('canvas');
   c.width = c.height = S;
   const g = c.getContext('2d');
@@ -90,7 +90,7 @@ function leafTexture(maxAniso) {
   lobe(-1.6, S * 0.42, S * 0.18);
   lobe(1.6, S * 0.42, S * 0.18);
   g.strokeStyle = 'rgba(90,100,50,0.55)';
-  g.lineWidth = 2;
+  g.lineWidth = 3;
   [0, -0.85, 0.85, -1.6, 1.6].forEach((a, i) => {
     g.save();
     g.rotate(a);

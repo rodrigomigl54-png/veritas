@@ -53,6 +53,30 @@ export const site = {
     customerCopy: false,
   },
 
+  // Intro: real drone footage for shots 1–2 (flight through the vineyard + rise into the sky).
+  // Put the files in /public/video/ and set the paths, e.g. '/video/dron-vinograd.mp4'.
+  // While null, the procedural 3D vineyard is used. The 3D barrel pour always follows.
+  intro: {
+    droneVideo: null, // 1920×1080 or 2560×1440 H.264/HEVC mp4, ~5 s, muted
+    droneVideoMobile: null, // optional lighter/vertical version for phones
+    droneVideoPoster: null, // first frame as a JPG/WebP
+    droneVideoEnd: null, // optional cut point in seconds
+  },
+
+  // Full-bleed background photo per section (ids from src/config/images.js). The overlay colour is
+  // taken automatically from each photo's dominant colour, so text, lines and tint match the picture.
+  // Change `image` to use another photo; `strength` (0–1) = how dark the overlay is.
+  sectionBackgrounds: {
+    philosophy: { image: 'philosophy', strength: 0.86, blur: true },
+    about: { image: 'gallery-dji_0047', fallback: 'about-hero', fallbackMobile: 'about-hero-mobile', strength: 0.78 },
+    vineyards: { image: 'vineyards-hero', mobile: 'vineyards-hero-mobile', strength: 0.72 },
+    cellar: { image: 'cellar-hero', mobile: 'cellar-hero-mobile', strength: 0.82 },
+    visits: { image: 'visits-hero', mobile: 'visits-hero-mobile', strength: 0.78 },
+    gallery: { image: 'gallery-aca_8631', strength: 0.88 },
+    shops: { image: 'gallery-aca_8470', strength: 0.84 },
+    contact: { image: 'gallery-dji_0047', strength: 0.82 },
+  },
+
   // About section background video. TODO: replace the photo with a video — set e.g. '/video/vinograd.mp4'.
   aboutVideo: null,
 

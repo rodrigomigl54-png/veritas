@@ -11,7 +11,7 @@ import { detectTier } from './quality.js';
 
 const FLIGHT = 3.5;
 const RISE = 1.5;
-const MIN_POUR = 2.0;
+const MIN_POUR = 2.6; // whole pour (both glasses); each glass ≥ 1.3 s
 const TOAST = 2.0;
 const CONTACT_AT = 0.95; // seconds into the toast
 
@@ -28,7 +28,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
  *           onClink?: () => void, forceTier?: string }} o
  */
 export function createIntroScene(canvas, o) {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', alpha: false });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', alpha: false });
   const gl = renderer.getContext();
   const detected = detectTier(gl);
   const tier = o.forceTier === 'high' || o.forceTier === 'low' ? o.forceTier : detected.tier;
@@ -265,47 +265,55 @@ export function createIntroScene(canvas, o) {
 
   const pourTarget = (gl) => glasses.surfaceWorld(gl, v2).clone();
 
+  // Sequential pour: the barrel fills the LEFT glass first, the stream stops, the barrel moves over
+  // the RIGHT glass and fills it. The pour is the loader: 0–50 % = left glass, 50–100 % = right glass.
+  // Wine only rises while the stream is actually running.
+  let side = 0; // animated barrel position: 0 = over the left glass, 1 = over the right glass
+  let tilt = 0;
   const shotPour = (t, dt) => {
     holdSetCam(Math.min(t, 4) * 0.08);
-    // Smoothed progress: never jumps, never faster than MIN_POUR for the full pour.
     const real = clamp01(o.progress());
-    const maxStep = dt / MIN_POUR;
     const tiltIn = clamp01(t / 0.55);
-    if (tiltIn >= 1) pourShown = Math.min(real, pourShown + maxStep);
+    const targetSide = pourShown < 0.4999 ? 0 : 1;
+    const step = dt / 0.8; // ~0.8 s to travel between the glasses
+    side += THREE.MathUtils.clamp(targetSide - side, -step, step);
+    const settled = Math.abs(side - targetSide) < 1e-3;
+    const halfEnd = targetSide === 0 ? 0.5 : 1;
+    const canPour = tiltIn >= 1 && settled;
+    // Each glass takes at least MIN_POUR / 2; never faster than the real loading.
+    if (canPour) pourShown = Math.min(real, halfEnd, pourShown + dt / MIN_POUR);
+    const pouring = canPour && pourShown < halfEnd - 1e-4;
     o.onPercent(pourShown, true, percentY);
 
-    // Barrel tilts forward, then alternates between the two glasses.
-    const sway = Math.sin(t * 2.6) ;
-    const side = Math.tanh(sway * 3) * 0.5 + 0.5; // 0 = left glass, 1 = right glass
-    barrel.object.rotation.x = easeOut(tiltIn) * 0.32;
-    barrel.object.position.x = lerp(-GL_X, GL_X, side) * easeOut(tiltIn);
+    // Tilt forward to pour, ease back a little while travelling to the second glass.
+    const tiltTarget = tiltIn < 1 ? easeOut(tiltIn) * 0.34 : settled ? 0.34 : 0.14;
+    tilt += (tiltTarget - tilt) * Math.min(1, dt * 6);
+    const sideE = easeInOut(side);
+    barrel.object.rotation.x = tilt;
     barrel.object.position.y = barrelHome.y + Math.sin(elapsed * 1.2) * 0.02;
-    barrel.object.rotation.z = (side - 0.5) * 0.06;
-    barrel.object.rotation.y = BARREL_YAW + (side - 0.5) * 0.12;
+    barrel.object.rotation.z = (sideE - 0.5) * 0.05;
+    barrel.object.rotation.y = BARREL_YAW + (sideE - 0.5) * 0.1;
     // Keep the tap exactly above the glass being filled.
+    barrel.object.position.x = 0;
     barrel.object.updateWorldMatrix(true, true);
     const tapW = barrel.tapTip.getWorldPosition(v);
-    barrel.object.position.x += (SET.x + lerp(-GL_X, GL_X, side) - tapW.x) * easeOut(tiltIn);
+    barrel.object.position.x = SET.x + lerp(-GL_X, GL_X, sideE) - tapW.x;
 
-    // Fill each glass: the one under the stream catches up a little faster.
-    const target = pourShown;
-    const lead = 0.06;
-    glasses.left.fill = Math.min(target, Math.max(glasses.left.fill, target - (side < 0.5 ? 0 : lead)));
-    glasses.right.fill = Math.min(target, Math.max(glasses.right.fill, target - (side >= 0.5 ? 0 : lead)));
+    glasses.left.fill = clamp01(pourShown * 2);
+    glasses.right.fill = clamp01(pourShown * 2 - 1);
+    // A little slosh in the glass that is being filled.
+    const active = targetSide === 0 ? glasses.left : glasses.right;
+    if (pouring) active.sloshV += (Math.random() - 0.5) * dt * 3;
 
-    const pouring = tiltIn >= 1 && pourShown < 0.999;
-    stream.mesh.visible = tiltIn > 0.7 && (pouring || t < 0.8);
-    if (stream.mesh.visible) {
+    stream.mesh.visible = pouring;
+    if (pouring) {
       barrel.tapTip.updateWorldMatrix(true, false);
-      const from = barrel.tapTip.getWorldPosition(v);
-      const active = side < 0.5 ? glasses.left : glasses.right;
+      const from = barrel.tapTip.getWorldPosition(v).clone();
       const to = pourTarget(active);
-      to.x += (side < 0.5 ? 0.01 : -0.01);
       stream.update(from, to, 0.016, elapsed);
-      if (pouring) droplets.spawn(to, high ? 2 : 1);
+      droplets.spawn(to, high ? 2 : 1);
     }
-    if (tiltIn >= 1 && pourShown >= 0.999 && t > MIN_POUR) return true;
-    return false;
+    return tiltIn >= 1 && pourShown >= 0.999 && t > MIN_POUR;
   };
 
   const toastStart = { left: new THREE.Vector3(), right: new THREE.Vector3() };
@@ -437,8 +445,16 @@ export function createIntroScene(canvas, o) {
   return {
     tier,
     renderer: detected.renderer,
-    start() {
+    // startPhase 'pour': shots 1–2 were played by a real drone video; start in the sky set.
+    start(startPhase) {
       last = performance.now();
+      if (startPhase === 'pour') {
+        phase = 'pour';
+        shotRise(RISE);
+        prevCam.copy(camera.position);
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       shotFlight(0);
       prevCam.copy(camera.position);
       raf = requestAnimationFrame(frame);

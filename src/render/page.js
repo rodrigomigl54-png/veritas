@@ -30,6 +30,24 @@ const heading = (eyebrowKey, titleKey, tag = 'h2', cls = '') => `<header class="
   <span class="hairline${cls.includes('center') ? ' hairline--center' : ''}" aria-hidden="true"></span>
 </header>`;
 
+
+// Full-bleed section background photo + overlay tinted with the photo's dominant colour.
+// Returns { html, style } — empty until the image exists (sections keep their solid colour).
+function sectionBg(key, extra = '') {
+  const cfg = site.sectionBackgrounds?.[key];
+  if (!cfg) return { html: '', style: '' };
+  const id = [cfg.image, cfg.fallback].find((x) => x && hasImage(x));
+  if (!id) return { html: '', style: '' };
+  const meta = imageMeta(id);
+  const mobileId = id === cfg.image ? cfg.mobile : cfg.fallbackMobile;
+  const mobile = mobileId && hasImage(mobileId) ? mobileId : undefined;
+  const html = `<div class="section-bg${cfg.blur ? ' section-bg--blur' : ''}" aria-hidden="true">
+    <div class="section-bg__media parallax" data-speed="0.18">${picture(id, { alt: '', mobileId: mobile, className: 'section-bg__pic' })}${extra}</div>
+    <div class="section-bg__tint"></div>
+  </div>`;
+  return { html, style: ` style="--tint:${meta.dominant || '#2a0710'};--strength:${cfg.strength ?? 0.8}"`, cls: ' has-bg' };
+}
+
 // ---------- Intro ----------
 function intro() {
   return `<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Vinarija Veritas">
@@ -86,6 +104,7 @@ function header() {
 
 // ---------- Hero + philosophy ----------
 function hero() {
+  const pbg = sectionBg('philosophy');
   return `<section class="hero" id="pocetna" aria-labelledby="hero-title">
   <div class="hero__media">${picture('hero-desktop', { mobileId: 'hero-mobile', alt: 'Vinarija Veritas, Sremski Karlovci', eager: true, className: 'hero__pic' })}</div>
   <div class="hero__overlay" aria-hidden="true"></div>
@@ -102,7 +121,8 @@ function hero() {
   </div>
   <a href="#filozofija" class="scroll-indicator" data-i18n-attr="aria-label:hero.scroll" aria-label="${esc(t('hero.scroll', 'sr'))}"><span class="scroll-indicator__line"></span></a>
 </section>
-<section class="philosophy" id="filozofija" aria-label="Naša filozofija">
+<section class="philosophy${pbg.cls || ''}" id="filozofija" aria-label="Naša filozofija"${pbg.style}>
+  ${pbg.html}
   <div class="container philosophy__grid">
     <figure class="philosophy__media reveal">${picture('philosophy', { alt: 'Naša filozofija', sizes: '(max-width: 767px) 100vw, 40vw', className: 'philosophy__pic' })}</figure>
     <blockquote class="philosophy__text reveal"><p ${thtml('hero.philosophyHtml')}</p></blockquote>
@@ -142,26 +162,14 @@ function winesSection() {
 }
 
 // ---------- About ----------
-function pickAboutBackground() {
-  // Prefer a wide, high-resolution winery photo (drone shot first); fall back to a Pexels photo.
-  const candidates = ['gallery-dji_0047', 'about-hero', 'stock-about-vineyard'];
-  const ok = candidates.find((id) => {
-    const m = imageMeta(id);
-    return m && m.width >= 2400 && m.width / m.height >= 1.3;
-  });
-  return ok || candidates.find(hasImage) || 'about-hero';
-}
-
 function about() {
-  const bg = pickAboutBackground();
+  // TODO: replace with video — set site.aboutVideo in src/config/site.js; the <video> plays over the photo (poster).
   const video = site.aboutVideo
-    ? `<video class="about__video" autoplay muted loop playsinline preload="none" poster=""><source src="${esc(site.aboutVideo)}" type="video/mp4"></video>`
+    ? `<video class="about__video" autoplay muted loop playsinline preload="none"><source src="${esc(site.aboutVideo)}" type="video/mp4"></video>`
     : '';
-  return `<section class="about" id="o-nama" aria-labelledby="about-title">
-  <div class="about__bg" aria-hidden="true">
-    <!-- TODO: replace with video — set site.aboutVideo in src/config/site.js; the <video> is rendered over this photo (used as poster). -->
-    <div class="about__bg-inner parallax" data-speed="0.25">${picture(bg, { alt: '', mobileId: bg === 'about-hero' ? 'about-hero-mobile' : undefined, className: 'about__bg-pic' })}${video}</div>
-  </div>
+  const bg = sectionBg('about', video);
+  return `<section class="about${bg.cls || ''}" id="o-nama" aria-labelledby="about-title"${bg.style}>
+  ${bg.html}
   <div class="container about__grid">
     <div class="about__text">
       <header class="section-head"><p class="eyebrow" ${tx('about.eyebrow')}</p><h2 class="section-title" id="about-title" data-split ${tx('about.title')}</h2><span class="hairline" aria-hidden="true"></span></header>
@@ -190,8 +198,9 @@ function vineyards() {
     ['<span data-count="130">130</span>–<span data-count="200">200</span> m', 'vineyards.statAlt'],
     ['<span data-count="2010" data-from="1990">2010</span>.', 'vineyards.statFounded'],
   ];
-  return `<section class="vineyards section--cream" id="vinogradi" aria-labelledby="vineyards-title">
-  <div class="banner parallax-wrap">${picture('vineyards-hero', { mobileId: 'vineyards-hero-mobile', alt: 'Vinogradi Veritas, Fruška gora', className: 'banner__pic parallax', imgClass: '' })}</div>
+  const bg = sectionBg('vineyards');
+  return `<section class="vineyards${bg.cls || ''}" id="vinogradi" aria-labelledby="vineyards-title"${bg.style}>
+  ${bg.html}
   <div class="container vineyards__grid">
     <div class="vineyards__text">
       <header class="section-head"><p class="eyebrow" ${tx('vineyards.eyebrow')}</p><h2 class="section-title" id="vineyards-title" data-split ${tx('vineyards.title')}</h2><span class="hairline" aria-hidden="true"></span></header>
@@ -209,6 +218,7 @@ function vineyards() {
 
 // ---------- Cellar ----------
 function cellar() {
+  const bg = sectionBg('cellar');
   const stock = Object.keys(stockSlots).filter((id) => id.startsWith('stock-cellar') && hasImage(id));
   const tiles = [
     `<div class="collage__item collage__item--a parallax" data-speed="-0.06">${picture('cellar-hero', { mobileId: 'cellar-hero-mobile', alt: 'Barik podrum vinarije Veritas', sizes: '(max-width: 767px) 100vw, 50vw' })}</div>`,
@@ -218,7 +228,8 @@ function cellar() {
         `<div class="collage__item collage__item--glass collage__item--g${i + 1} glass-in parallax" data-speed="${i % 2 ? 0.1 : -0.04}">${picture(id, { alt: 'Čaša crvenog vina', sizes: '(max-width: 767px) 50vw, 22vw' })}</div>`,
     ),
   ];
-  return `<section class="cellar" id="podrum" aria-labelledby="cellar-title">
+  return `<section class="cellar${bg.cls || ''}" id="podrum" aria-labelledby="cellar-title"${bg.style}>
+  ${bg.html}
   <div class="cellar__vignette" aria-hidden="true"></div>
   <div class="container cellar__grid">
     <div class="cellar__text">
@@ -235,14 +246,15 @@ function cellar() {
 
 // ---------- Visits ----------
 function visits() {
+  const bg = sectionBg('visits');
   const cards = [
     ['vine', 'visits.card1'],
     ['cheese', 'visits.card2'],
     ['briefcase', 'visits.card3'],
     ['toast', 'visits.card4'],
   ];
-  return `<section class="visits" id="posete" aria-labelledby="visits-title">
-  <div class="banner banner--short parallax-wrap">${picture('visits-hero', { mobileId: 'visits-hero-mobile', alt: 'Posete i događaji u vinariji Veritas', className: 'banner__pic parallax' })}</div>
+  return `<section class="visits${bg.cls || ''}" id="posete" aria-labelledby="visits-title"${bg.style}>
+  ${bg.html}
   <div class="container">
     <header class="section-head section-head--center"><p class="eyebrow" ${tx('visits.eyebrow')}</p><h2 class="section-title" id="visits-title" data-split ${tx('visits.title')}</h2><span class="hairline hairline--center" aria-hidden="true"></span></header>
     <div class="visits__intro reveal"><p ${tx('visits.intro1')}</p><p ${tx('visits.intro2')}</p></div>
@@ -270,6 +282,7 @@ function visits() {
 
 // ---------- Gallery ----------
 function gallery() {
+  const bg = sectionBg('gallery');
   const m = getManifest();
   const ids = [...Object.keys(galleryImages), ...(m.galleryExtra || [])];
   const items = ids
@@ -279,7 +292,8 @@ function gallery() {
       return `<li class="gallery__item gallery__item--${shape}${i >= 12 ? ' is-extra' : ''}"><button type="button" class="gallery__btn" data-gallery-index="${i}" data-gallery-id="${id}" data-i18n-attr="aria-label:gallery.open" aria-label="${esc(t('gallery.open', 'sr'))}">${picture(id, { alt: `${t('gallery.photo', 'sr')} ${i + 1}`, sizes: '(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw' })}</button></li>`;
     })
     .join('');
-  return `<section class="gallery" id="galerija" aria-labelledby="gallery-title">
+  return `<section class="gallery${bg.cls || ''}" id="galerija" aria-labelledby="gallery-title"${bg.style}>
+  ${bg.html}
   <div class="container">
     ${heading('gallery.eyebrow', 'gallery.title', 'h2', 'section-head--center').replace('class="section-title"', 'class="section-title" id="gallery-title"')}
     <ul class="gallery__grid" data-collapsed="true">${items}</ul>
@@ -290,7 +304,9 @@ function gallery() {
 
 // ---------- Where to buy ----------
 function shops() {
-  return `<section class="shops section--cream" id="gde-kupiti" aria-labelledby="shops-title">
+  const bg = sectionBg('shops');
+  return `<section class="shops${bg.cls || ''}" id="gde-kupiti" aria-labelledby="shops-title"${bg.style}>
+  ${bg.html}
   <div class="container">
     <header class="section-head section-head--center"><p class="eyebrow" ${tx('shops.eyebrow')}</p><h2 class="section-title section-title--md" id="shops-title" data-split ${tx('shops.title')}</h2><span class="hairline hairline--center" aria-hidden="true"></span></header>
     <div class="map-frame reveal"><iframe src="${site.maps.shops}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-i18n-attr="title:shops.mapTitle" title="${esc(t('shops.mapTitle', 'sr'))}" allowfullscreen></iframe></div>
@@ -301,10 +317,12 @@ function shops() {
 // ---------- Contact ----------
 function contact() {
   const c = site.contact;
+  const bg = sectionBg('contact');
   const hours = c.openingHours
     ? `<li>${icon('clock')}<div><span class="contact__label" ${tx('contact.hours')}</span><span>${esc(c.openingHours)}</span></div></li>`
     : '';
-  return `<section class="contact" id="kontakt" aria-labelledby="contact-title">
+  return `<section class="contact${bg.cls || ''}" id="kontakt" aria-labelledby="contact-title"${bg.style}>
+  ${bg.html}
   <div class="container contact__grid">
     <div class="contact__info">
       <header class="section-head"><p class="eyebrow" ${tx('contact.eyebrow')}</p><h2 class="section-title" id="contact-title" data-split ${tx('contact.title')}</h2><span class="hairline" aria-hidden="true"></span></header>

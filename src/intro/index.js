@@ -9,6 +9,7 @@ import { createPreloader } from './preload.js';
 import { setSound, playClink } from './audio.js';
 import { imageMeta } from '../render/picture.js';
 import { t } from '../i18n/index.js';
+import { site } from '../config/site.js';
 import { reducedMotion } from '../ui/motion.js';
 
 export function runIntro({ onReveal, onFinish } = {}) {
@@ -125,6 +126,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
     if (revealing || skipping) return;
     skipping = true;
     scene?.stop();
+    root.querySelector('.intro__video')?.remove();
     preloader.seal();
     root.classList.add('is-skipping');
     const tick = () => {
@@ -162,8 +164,40 @@ export function runIntro({ onReveal, onFinish } = {}) {
     requestAnimationFrame(step);
   };
 
+  // ---------- Real drone footage for shots 1–2 (optional, site.intro.droneVideo) ----------
+  // Plays full-screen, then dissolves into the 3D sky set where the barrel pours.
+  // Resolves when the clip has finished (or immediately with false if there is no / a broken clip).
+  const playDroneVideo = () =>
+    new Promise((resolve) => {
+      const cfg = site.intro || {};
+      const mobile = window.matchMedia('(max-width: 767px)').matches;
+      const src = (mobile && cfg.droneVideoMobile) || cfg.droneVideo;
+      if (!src) return resolve(null);
+      const video = document.createElement('video');
+      video.className = 'intro__video';
+      Object.assign(video, { muted: true, playsInline: true, preload: 'auto', autoplay: true });
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      if (cfg.droneVideoPoster) video.poster = cfg.droneVideoPoster;
+      video.src = src;
+      canvas.before(video);
+      let done = false;
+      const finish = (ok) => {
+        if (done) return;
+        done = true;
+        resolve(ok ? video : null);
+        if (!ok) video.remove();
+      };
+      const end = cfg.droneVideoEnd; // optional cut point in seconds
+      video.addEventListener('timeupdate', () => end && video.currentTime >= end && finish(true));
+      video.addEventListener('ended', () => finish(true));
+      video.addEventListener('error', () => finish(false));
+      video.play().catch(() => finish(false));
+    });
+
   // ---------- 3D version ----------
   const run3D = async () => {
+    const videoDone = playDroneVideo();
     try {
       const [{ createIntroScene }, THREE] = await Promise.all([import('./scene.js'), import('three')]);
       if (skipping || revealing) return;
@@ -196,7 +230,15 @@ export function runIntro({ onReveal, onFinish } = {}) {
         onContact: (pt) => reveal(pt),
       });
       root.dataset.tier = scene.tier;
-      scene.start();
+      const video = await videoDone;
+      if (skipping || revealing) return;
+      if (video) {
+        // Real footage ended in the sky → dissolve into the barrel + glasses.
+        scene.start('pour');
+        gsap.to(video, { opacity: 0, duration: 0.7, ease: 'power2.inOut', onComplete: () => video.remove() });
+      } else {
+        scene.start();
+      }
     } catch (err) {
       console.warn('[intro] 3D failed, using 2D fallback', err);
       scene?.dispose();

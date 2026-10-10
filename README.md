@@ -45,6 +45,11 @@ section photos, wine bottles, the full gallery) and
   `public/images/brand/veritas-logo.svg` (review it against the PNG before using it anywhere),
 - writes `src/config/image-manifest.json`, which the site reads to build `<picture>` elements.
 
+**No access to the old site?** Save the original files (logo PNGs, bottle PNGs, photos — any folder
+structure, original file names) and run `npm run assets -- --from path/to/folder`. Files are matched by
+name (`bela-harmonija.png`, `2022-pocetna-2.jpg`, `DJI_0047.jpg`, …); anything not found locally is
+fetched from the URLs.
+
 Until an image exists, the site shows a neutral dark placeholder in its place. Re-running is safe
 (downloads are cached in `.cache/`, use `--force` to re-process). Behind a corporate proxy run it with
 `NODE_USE_ENV_PROXY=1 npm run assets` (Node ≥ 22.21).
@@ -93,6 +98,20 @@ supports it — enable with `forms.customerCopy: true` in `src/config/site.js`.
   hidden while it is `null`.
 - **Delivery fee:** `site.shop.deliveryFee` is `null` (“to be confirmed”). Set a number (RSD) to show
   and add it below 6 bottles.
+
+## Intro with real drone footage
+
+For a truly photographic intro, shots 1–2 (flight between the rows + the climb into the sky) can be
+played from a real drone clip; the 3D barrel pour, the toast and the logo reveal follow seamlessly.
+Put the clip in `public/video/` (≈5 s, 1920×1080 or 2560×1440, muted H.264 mp4, ideally ending on the
+sky) and set `site.intro.droneVideo` (optionally `droneVideoMobile`, `droneVideoPoster`,
+`droneVideoEnd`) in `src/config/site.js`. Without a clip, the procedural 3D vineyard is used.
+
+## Section background photos
+
+Every section has its own full-bleed photo (`site.sectionBackgrounds` in `src/config/site.js`). The
+overlay colour is computed automatically from each photo's dominant colour (`npm run assets`), so the
+tint, hairlines and cards match the picture. Change `image` to swap a photo, `strength` to darken it.
 
 ## Replacing the “O nama” photo with a video
 

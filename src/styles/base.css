@@ -766,3 +766,40 @@ html.js .reveal.is-in {
     grid-template-columns: 1fr;
   }
 }
+
+/* Gold logo as an image + masked shine sweep */
+.logo--img {
+  position: relative;
+  background: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+.logo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.logo__shine {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 250, 225, 0.95) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: logoSweep 4.5s 1s ease-in-out infinite;
+}
+@keyframes logoSweep {
+  0% { background-position: 150% 0; }
+  45%, 100% { background-position: -60% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo__shine { animation: none; }
+}

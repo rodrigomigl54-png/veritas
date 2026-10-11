@@ -73,9 +73,10 @@ export const site = {
         ['/video/intro-drone-1080.webm', 'video/webm'],
         ['/video/intro-drone-1080.mp4', 'video/mp4'],
       ],
+      // Phones get the same 1080p clip (the 720p one looked soft on high-density screens).
       small: [
-        ['/video/intro-drone-720.webm', 'video/webm'],
-        ['/video/intro-drone-720.mp4', 'video/mp4'],
+        ['/video/intro-drone-1080.webm', 'video/webm'],
+        ['/video/intro-drone-1080.mp4', 'video/mp4'],
       ],
     },
   },

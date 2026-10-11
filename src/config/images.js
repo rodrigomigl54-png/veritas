@@ -32,7 +32,7 @@ export const siteImages = {
 
   'vineyards-hero': { candidates: [`${U}/2022/10/2022-vinogradi.jpg`, L('dron-11.5.jpg')] },
   'vineyards-hero-mobile': { candidates: [`${U}/2022/10/2022-vinogradi-mob.jpg`] },
-  'vineyards-1': { candidates: [`${U}/2022/08/vinogradi-1.jpg`, L('dron-8.5.jpg')] },
+  'vineyards-1': { candidates: [`${U}/2022/08/vinogradi-1.jpg`, L('photo-vineyard-poplars.jpg')] },
 
   'cellar-hero': { candidates: [`${U}/2022/08/podrum-hero.jpg`, L('photo-cellar-1.jpg')] },
   'cellar-hero-mobile': { candidates: [`${U}/2022/08/podrum-hero-mob.jpg`] },

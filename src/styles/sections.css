@@ -1686,3 +1686,21 @@ html.menu-open .site-header {
     display: none;
   }
 }
+
+/* Hero logo (replaces the text title) — gentle gold shine on entry */
+.hero__logo {
+  height: clamp(170px, 28vw, 300px);
+  filter: drop-shadow(0 6px 30px rgba(0, 0, 0, 0.45));
+}
+html:not(.is-intro) .hero__logo.logo--gold {
+  animation: heroShine 2.6s 0.4s var(--ease) both, heroGlow 6s 3s ease-in-out infinite;
+}
+@keyframes heroShine {
+  from { background-position: 120% 0; opacity: 0; transform: scale(0.94); }
+  25% { opacity: 1; }
+  to { background-position: -60% 0; opacity: 1; transform: none; }
+}
+@keyframes heroGlow {
+  0%, 100% { filter: drop-shadow(0 6px 30px rgba(0, 0, 0, 0.45)); }
+  50% { filter: drop-shadow(0 0 22px rgba(226, 201, 143, 0.45)); }
+}

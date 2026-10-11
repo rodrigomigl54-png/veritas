@@ -119,7 +119,7 @@ function hero() {
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="hero__content container">
     <p class="eyebrow hero__eyebrow" ${tx('hero.eyebrow')}</p>
-    <h1 class="hero__title" id="hero-title" ${tx('hero.title')}</h1>
+    <h1 class="hero__title" id="hero-title">${logo({ variant: 'white', className: 'logo--gold hero__logo', label: 'Vinarija Veritas' })}<span class="sr-only" ${tx('hero.title')}</span></h1>
     <p class="hero__sub" ${tx('hero.sub')}</p>
     <span class="hairline hairline--center" aria-hidden="true"></span>
     <p class="hero__lead" ${tx('hero.lead')}</p>
@@ -294,7 +294,7 @@ function gallery() {
   const bg = sectionBg('gallery');
   const m = getManifest();
   // Only photos that actually exist (winery originals first, then supplied photos and drone stills).
-  const ids = [...Object.keys(galleryImages), ...(m.galleryExtra || []), ...Object.keys(localImages)].filter(hasImage);
+  const ids = [...Object.keys(galleryImages), ...(m.galleryExtra || []), ...Object.keys(localImages).filter((id) => !id.startsWith('dron-'))].filter(hasImage);
   const items = ids
     .map((id, i) => {
       const meta = imageMeta(id);

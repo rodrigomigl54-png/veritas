@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T23:17:41.437Z",
+  "generatedAt": "2026-10-11T11:13:21.673Z",
   "images": {
     "logo-main": {
       "base": "/images/brand/logo-main",
@@ -176,14 +176,12 @@
     },
     "vineyards-1": {
       "base": "/images/site/vineyards-1",
-      "width": 1920,
-      "height": 1080,
+      "width": 894,
+      "height": 894,
       "widths": [
         480,
         800,
-        1200,
-        1600,
-        1920
+        894
       ],
       "formats": [
         "avif",
@@ -191,9 +189,10 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQBACdASoUAAsAPu1kqU2ppaOiMAgBMB2JaACdMoKP+AkIARnU4VafIAD+qdInpKvl0XOyXd7u2HFfvb1dK6bIq7W8mWhT7un3NhB3RpCQ6wqch2dgAA==",
-      "dominant": "#382808",
-      "source": "local:dron-8.5.jpg"
+      "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBACdASoUABQAPu1oqk+ppaOiKA1RMB2JQBhWbIAsuNE7ctbnUh+3DD24zWyAAP6x92MKNxBrndLDvNPZrD+kdqePvl+kxyZn0t3rt4doTaxOT2JG7ri1qyPW5iUgSIYTwfhopCR1eMBHyxBnnMKZfKNJsDds3es81QZ7rrQRuJygwqKWs3XTtyygq9d8xiwaX1k1Zcuciuxwb16tAAAA",
+      "dominant": "#181808",
+      "source": "local:photo-vineyard-poplars.jpg",
+      "upscaled": true
     },
     "cellar-hero": {
       "base": "/images/site/cellar-hero",

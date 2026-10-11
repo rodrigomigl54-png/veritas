@@ -539,3 +539,152 @@ html.is-intro .header-logo {
   will-change: transform, filter;
   transform-origin: 50% 40%;
 }
+
+/* ---------- Photographic intro scene (src/intro/composite.js) ---------- */
+.ic {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #6f9fd4 center / cover no-repeat;
+}
+.ic__sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ic__stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(100vw, 100vh);
+  height: min(100vw, 100vh);
+  transform: translate(-50%, -50%);
+}
+@media (orientation: portrait) {
+  .ic__stage {
+    width: 100vw;
+    height: min(100vh, 150vw);
+  }
+}
+.ic__barrel {
+  position: absolute;
+  left: 30%;
+  top: 4%;
+  width: 40%;
+  aspect-ratio: 888 / 742;
+  transform-origin: 40% 60%;
+  filter: drop-shadow(0 28px 30px rgba(20, 40, 70, 0.35));
+}
+.ic__barrel-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Gold Veritas brand on the barrel head (ellipse in the photo: centre 30.4 % / 62 %) */
+.ic__brand-wrap {
+  position: absolute;
+  left: 28.6%;
+  top: 60.5%;
+  width: 40%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(-14deg) scaleX(0.76);
+}
+.ic__brand,
+.ic__brand-burn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* dark burned-in groove under the gold so the brand reads on light oak */
+.ic__brand-burn {
+  background: #3b1c07;
+  opacity: 0.8;
+  transform: translate(1.5px, 2.5px);
+  filter: blur(1.2px);
+}
+.ic__brand {
+  filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 10px rgba(255, 215, 130, 0.55));
+}
+.ic__brand.logo--gold {
+  --logo-color: linear-gradient(115deg, #8a5a14 0%, #d9a640 28%, #fff4cc 42%, #e8b54a 55%, #8a5a14 100%);
+  background-size: 260% 100%;
+  animation: brandGlow 2.4s ease-in-out infinite alternate;
+}
+@keyframes brandGlow {
+  from { filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 6px rgba(255, 215, 130, 0.35)); }
+  to { filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 22px rgba(255, 215, 120, 1)); }
+}
+/* brass spigot at the bottom of the barrel head */
+.ic__tap {
+  position: absolute;
+  left: 27.5%;
+  top: 90%;
+  width: 6%;
+  height: 9%;
+  border-radius: 2px 2px 40% 40%;
+  background: linear-gradient(90deg, #6b4b1d, #e8c27a 40%, #fff0c4 50%, #b88a3c 70%, #5e4219);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+.ic__glass {
+  position: absolute;
+  top: 45%;
+  width: 33%;
+  aspect-ratio: 767 / 1100;
+  transform-origin: 50% 60%;
+}
+.ic__glass--l {
+  left: 20%;
+}
+.ic__glass--r {
+  left: 47%;
+}
+.ic__wine,
+.ic__glass-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ic__glass-img {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4));
+}
+.ic__fx,
+.ic__sparks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ic__stream,
+.ic__stream-hi {
+  transition: opacity 0.15s;
+}
+
+@media (orientation: portrait) {
+  .ic__barrel {
+    left: 22%;
+    top: 7%;
+    width: 48%;
+  }
+  .ic__glass {
+    top: 46%;
+    width: 44%;
+  }
+  .ic__glass--l {
+    left: 5%;
+  }
+  .ic__glass--r {
+    left: 39%;
+  }
+}
+
+/* Percentage over the bright sky */
+.intro:has(.ic) .intro__progress {
+  color: #fff;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(10, 30, 60, 0.55);
+}

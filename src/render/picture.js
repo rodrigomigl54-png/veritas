@@ -86,7 +86,7 @@ export function logo({ variant = 'white', className = '', label = 'Vinarija Veri
     // Real gold image (immune to forced dark modes) + a light sweep masked to the logo shape.
     const gold = asset('/images/brand/logo-gold-512.webp');
     const goldHi = asset('/images/brand/logo-gold-1024.webp');
-    return `<span class="logo logo--img ${className}" role="img" aria-label="${esc(label)}" style="aspect-ratio:${m.width}/${m.height}"><img class="logo__img" src="${gold}" srcset="${gold} 512w, ${goldHi} 1024w" sizes="300px" alt="" decoding="async"><span class="logo__shine" style="-webkit-mask-image:url('${url}');mask-image:url('${url}')"></span></span>`;
+    return `<span class="logo logo--img ${className}" role="img" aria-label="${esc(label)}" style="aspect-ratio:${m.width}/${m.height}"><img class="logo__img" src="${gold}" srcset="${gold} 512w, ${goldHi} 1024w" sizes="300px" alt="" decoding="async"><img class="logo__shine" src="${gold}" srcset="${gold} 512w, ${goldHi} 1024w" sizes="300px" alt="" decoding="async"></span>`;
   }
   return `<span class="logo ${className}" role="img" aria-label="${esc(label)}" style="-webkit-mask-image:url('${url}');mask-image:url('${url}');aspect-ratio:${m.width}/${m.height}"></span>`;
 }

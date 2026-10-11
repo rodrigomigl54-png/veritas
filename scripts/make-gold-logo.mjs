@@ -17,9 +17,10 @@ const gold = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${S}" h
     <stop offset=".5" stop-color="#e2b04c"/><stop offset=".68" stop-color="#b07d2a"/><stop offset=".84" stop-color="#f2cf7e"/><stop offset="1" stop-color="#8a5b16"/>
   </linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`);
 const rgb = await sharp(gold).removeAlpha().toBuffer();
-const img = sharp(rgb).joinChannel(alpha);
+// Flatten the joined RGBA into one PNG first; resizing a joinChannel() pipeline directly is unreliable.
+const full = await sharp(rgb).joinChannel(alpha).png().toBuffer();
 for (const w of [256, 512, 1024]) {
-  await img.clone().resize(w, w, { kernel: 'lanczos3' }).png({ compressionLevel: 9 }).toFile(`${OUT}/logo-gold-${w}.png`);
-  await img.clone().resize(w, w, { kernel: 'lanczos3' }).webp({ quality: 92, alphaQuality: 100 }).toFile(`${OUT}/logo-gold-${w}.webp`);
+  await sharp(full).resize(w, w, { kernel: 'lanczos3' }).png({ compressionLevel: 9 }).toFile(`${OUT}/logo-gold-${w}.png`);
+  await sharp(full).resize(w, w, { kernel: 'lanczos3' }).webp({ quality: 92, alphaQuality: 100 }).toFile(`${OUT}/logo-gold-${w}.webp`);
 }
 console.log('gold logo done');

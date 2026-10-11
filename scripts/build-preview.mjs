@@ -26,7 +26,7 @@ for (const m of Object.values(manifest.images)) {
   files.add(previewUrl(m));
   if (m.alpha) files.add(`${m.base}-${m.widths[m.widths.length - 1]}.png`);
 }
-['/video/intro-drone-720.mp4', '/video/hero-loop.mp4', '/video/intro-poster.jpg', '/video/sky-720.mp4', '/video/sky-poster.jpg', '/intro/barrel.webp', '/intro/glass.webp'].forEach((f) => files.add(f));
+['/video/intro-portrait.mp4', '/video/intro-landscape.mp4', '/video/hero-landscape.mp4', '/video/poster-portrait.jpg', '/video/poster-landscape.jpg', '/video/sky-720.mp4', '/video/sky-poster.jpg', '/intro/barrel.webp', '/intro/glass.webp', '/images/brand/logo-gold-512.webp', '/images/brand/logo-gold-1024.webp'].forEach((f) => files.add(f));
 const mime = { '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.mp4': 'video/mp4' };
 const map = {};
 for (const f of files) {
@@ -39,7 +39,7 @@ for (const f of files) {
 }
 // The site asks for 1080p clips on desktop: serve the embedded 720p versions under those names too.
 if (map['/video/sky-720.mp4']) map['/video/sky-1080.mp4'] = map['/video/sky-720.mp4'];
-if (map['/video/intro-drone-720.mp4']) map['/video/intro-drone-1080.mp4'] = map['/video/intro-drone-720.mp4'];
+if (map['/video/hero-landscape.mp4']) map['/video/hero-portrait.mp4'] = map['/video/hero-landscape.mp4'];
 let html = await fs.readFile(path.join(outDir, 'index.html'), 'utf8');
 // Rewrites static references once the DOM is parsed (runs before the deferred app module).
 const boot = `<script>globalThis.__VERITAS_PREVIEW__={map:${JSON.stringify(map)}};</script>`;

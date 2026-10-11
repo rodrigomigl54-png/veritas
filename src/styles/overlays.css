@@ -679,3 +679,45 @@ html.is-intro .header-logo {
   font-weight: 400;
   text-shadow: 0 1px 8px rgba(10, 30, 60, 0.55);
 }
+
+/* Sky flowing in from the top (intro "rise into the sky") */
+.ic.is-revealing {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(var(--reveal, 0%) - 55%), rgba(0, 0, 0, 0.6) calc(var(--reveal, 0%) - 25%), transparent var(--reveal, 0%));
+  mask-image: linear-gradient(to bottom, #000 calc(var(--reveal, 0%) - 55%), rgba(0, 0, 0, 0.6) calc(var(--reveal, 0%) - 25%), transparent var(--reveal, 0%));
+}
+
+/* Iris exit around the logo */
+.intro.is-iris > :is(.intro__canvas, .intro__shade, .ic, .intro__fallback, .intro__video) {
+  clip-path: circle(var(--iris) at var(--ix) var(--iy));
+}
+.intro__ring {
+  position: absolute;
+  left: var(--ix);
+  top: var(--iy);
+  width: calc(var(--iris) * 2);
+  height: calc(var(--iris) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(226, 201, 143, 0.9);
+  box-shadow: 0 0 24px rgba(226, 201, 143, 0.55), inset 0 0 24px rgba(226, 201, 143, 0.35);
+  pointer-events: none;
+}
+/* layer order: drone footage < sky scene (flows in over it) < logo / percentage / buttons */
+.intro .intro__video {
+  z-index: 0;
+}
+.intro .ic {
+  z-index: 1;
+}
+.intro__logo,
+.intro__progress,
+.intro__ring {
+  z-index: 3;
+}
+.intro__skip,
+.intro__sound {
+  z-index: 4;
+}
+.intro .intro__shade {
+  z-index: 2;
+}

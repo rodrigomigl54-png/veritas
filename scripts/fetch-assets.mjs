@@ -317,6 +317,10 @@ async function main() {
     if (svg) manifest.logoSvg = svg;
   }
 
+  // Drop entries that are no longer in the registry (stock photos are kept).
+  for (const id of Object.keys(manifest.images)) {
+    if (!allImages[id] && !id.startsWith('stock-') && !manifest.galleryExtra.includes(id)) delete manifest.images[id];
+  }
   await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   log(`manifest written: ${Object.keys(manifest.images).length} images, ${manifest.missing.length} missing`);
   if (manifest.missing.length) log('missing:', manifest.missing.join(', '));

@@ -4,6 +4,7 @@
 //  - "Preskoči" / Esc → logo reveal + transition (≈0.8 s); waits for loading with a gold line
 //  - logo flies into the header (FLIP), scene dissolves into the hero, scroll unlocks at the end
 import { gsap } from 'gsap';
+import { createCompositeIntro } from './composite.js';
 import { hasWebGL } from './quality.js';
 import { createPreloader } from './preload.js';
 import { setSound, playClink } from './audio.js';
@@ -104,7 +105,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
     } else {
       tl.to(logoWrap, { opacity: 0, duration: dur }, 0);
     }
-    tl.to([canvas, shade, root.querySelector('.intro__fallback')], { opacity: 0, duration: dur, ease: 'power2.inOut' }, 0);
+    tl.to([canvas, shade, root.querySelector('.intro__fallback'), root.querySelector('.ic')].filter(Boolean), { opacity: 0, duration: dur, ease: 'power2.inOut' }, 0);
     tl.to(root, { backgroundColor: 'rgba(18,12,13,0)', duration: dur, ease: 'power2.inOut' }, 0);
     tl.to([skipBtn, soundBtn, progressEl], { opacity: 0, duration: 0.3 }, 0);
   };
@@ -116,6 +117,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
     inertEls.forEach((el) => (el.inert = false));
     root.hidden = true;
     scene?.dispose();
+    photo?.dispose();
     scene = null;
     document.removeEventListener('keydown', onKey);
     onFinish?.();
@@ -126,6 +128,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
     if (revealing || skipping) return;
     skipping = true;
     scene?.stop();
+    photo?.stop();
     root.querySelector('.intro__video')?.remove();
     preloader.seal();
     root.classList.add('is-skipping');
@@ -196,10 +199,10 @@ export function runIntro({ onReveal, onFinish } = {}) {
         done = true;
         resolve({
           // Whip-tilt: footage drops away below, the sky set arrives from above.
-          whip: () => {
+          whip: (target = canvas) => {
             const d = 1.05;
-            gsap.set(canvas, { yPercent: -100, filter: 'blur(14px)' });
-            gsap.to(canvas, { yPercent: 0, filter: 'blur(0px)', duration: d, ease: 'power3.inOut' });
+            gsap.set(target, { yPercent: -100, filter: 'blur(14px)' });
+            gsap.to(target, { yPercent: 0, filter: 'blur(0px)', duration: d, ease: 'power3.inOut', clearProps: 'filter' });
             gsap.to(video, { yPercent: 100, scale: 1.08, filter: 'blur(16px)', duration: d, ease: 'power3.inOut', onComplete: () => video.remove() });
           },
         });
@@ -275,13 +278,42 @@ export function runIntro({ onReveal, onFinish } = {}) {
     } catch (err) {
       console.warn('[intro] 3D failed, using 2D fallback', err);
       scene?.dispose();
+    photo?.dispose();
       scene = null;
       preloader.seal();
       run2D();
     }
   };
 
-  if (use3D) run3D();
+  // ---------- Photographic version (default): drone → real sky → real barrel + glasses ----------
+  let photo = null;
+  const runPhoto = async () => {
+    photo = createCompositeIntro(root, {
+      sky: site.intro.sky,
+      progress: preloader.progress,
+      onPercent: (p, visible, y) => {
+        percentEl.textContent = `${Math.round(p * 100)}%`;
+        progressEl.style.opacity = visible ? '1' : '0';
+        if (y != null) {
+          progressEl.style.top = `${Math.min(window.innerHeight - 40, y + 12)}px`;
+          progressEl.style.bottom = 'auto';
+        }
+      },
+      onClink: playClink,
+      onContact: (pt) => reveal(pt),
+    });
+    preloader.seal();
+    gsap.set(photo.el, { yPercent: -100 });
+    const video = await playDroneVideo();
+    if (skipping || revealing) return;
+    photo.prepare();
+    if (video) video.whip(photo.el);
+    else gsap.fromTo(photo.el, { yPercent: 0, opacity: 0 }, { opacity: 1, duration: 0.8 });
+    photo.start();
+  };
+
+  if (use3D && site.intro?.mode === 'photo') runPhoto();
+  else if (use3D) run3D();
   else {
     preloader.seal();
     run2D();

@@ -57,6 +57,16 @@ export const site = {
   // where the 3D barrel pours. Built by scripts/grade-video.sh (golden-hour grade) from Pexels #19237031.
   // Set to null to use the procedural 3D vineyard instead.
   intro: {
+    // 'photo' = real footage + photographs (default); '3d' = the procedural Three.js scene.
+    mode: 'photo',
+    // Real blue sky with drifting clouds (Pexels #11519743) behind the barrel and the glasses.
+    sky: {
+      poster: '/video/sky-poster.jpg',
+      sources: [
+        ['/video/sky-1080.webm', 'video/webm'],
+        ['/video/sky-1080.mp4', 'video/mp4'],
+      ],
+    },
     droneVideo: {
       poster: '/video/intro-poster.jpg',
       large: [

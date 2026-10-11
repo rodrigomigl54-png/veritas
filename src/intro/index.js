@@ -94,7 +94,25 @@ export function runIntro({ onReveal, onFinish } = {}) {
     const header = document.querySelector('.header-logo');
     html.classList.add('intro-handoff');
     const tl = gsap.timeline({ onComplete: finish });
-    const dur = rm ? 0.4 : 0.8;
+    const dur = rm ? 0.4 : skipping ? 0.75 : 1.15;
+    // Iris: the scene closes into a circle around the logo, rimmed by a thin glowing gold ring,
+    // revealing the hero underneath while the logo flies into the header.
+    const lr = logoWrap.getBoundingClientRect();
+    const cx = lr.left + lr.width / 2;
+    const cy = lr.top + lr.height / 2;
+    const maxR = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+    if (!rm) {
+      root.classList.add('is-iris');
+      root.style.setProperty('--ix', `${cx}px`);
+      root.style.setProperty('--iy', `${cy}px`);
+      root.style.setProperty('--iris', `${maxR}px`);
+      gsap.set(root, { backgroundColor: 'rgba(18,12,13,0)' });
+      const ring = document.createElement('div');
+      ring.className = 'intro__ring';
+      root.append(ring);
+      tl.to(root, { '--iris': '0px', duration: dur, ease: 'power3.inOut' }, 0);
+      tl.fromTo(ring, { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0).to(ring, { opacity: 0, duration: 0.3 }, dur - 0.3);
+    }
     if (header && !rm) {
       const a = logoWrap.getBoundingClientRect();
       const b = header.getBoundingClientRect();
@@ -105,8 +123,10 @@ export function runIntro({ onReveal, onFinish } = {}) {
     } else {
       tl.to(logoWrap, { opacity: 0, duration: dur }, 0);
     }
-    tl.to([canvas, shade, root.querySelector('.intro__fallback'), root.querySelector('.ic')].filter(Boolean), { opacity: 0, duration: dur, ease: 'power2.inOut' }, 0);
-    tl.to(root, { backgroundColor: 'rgba(18,12,13,0)', duration: dur, ease: 'power2.inOut' }, 0);
+    if (rm) {
+      tl.to([canvas, shade, root.querySelector('.intro__fallback'), root.querySelector('.ic')].filter(Boolean), { opacity: 0, duration: dur, ease: 'power2.inOut' }, 0);
+      tl.to(root, { backgroundColor: 'rgba(18,12,13,0)', duration: dur, ease: 'power2.inOut' }, 0);
+    }
     tl.to([skipBtn, soundBtn, progressEl], { opacity: 0, duration: 0.3 }, 0);
   };
 
@@ -175,7 +195,7 @@ export function runIntro({ onReveal, onFinish } = {}) {
     new Promise((resolve) => {
       const cfg = site.intro?.droneVideo;
       if (!cfg) return resolve(null);
-      const small = window.matchMedia('(max-width: 900px)').matches || navigator.connection?.saveData;
+      const portrait = window.matchMedia('(orientation: portrait)').matches;
       const video = document.createElement('video');
       video.className = 'intro__video';
       video.muted = true;
@@ -183,8 +203,9 @@ export function runIntro({ onReveal, onFinish } = {}) {
       video.preload = 'auto';
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
-      if (cfg.poster) video.poster = asset(cfg.poster);
-      const srcs = small ? cfg.small : cfg.large;
+      const poster = portrait ? cfg.posterPortrait : cfg.posterLandscape;
+      if (poster) video.poster = asset(poster);
+      const srcs = (portrait ? cfg.portrait : cfg.landscape) || cfg.large;
       srcs.forEach(([src, type]) => {
         const el = document.createElement('source');
         el.src = asset(src);
@@ -198,12 +219,14 @@ export function runIntro({ onReveal, onFinish } = {}) {
         if (done) return;
         done = true;
         resolve({
-          // Whip-tilt: footage drops away below, the sky set arrives from above.
+          // "Rise into the sky": the drone footage tilts down and away while the real sky footage flows in
+          // from the top through a soft gradient mask, melting into the sky already visible in the clip.
           whip: (target = canvas) => {
-            const d = 1.05;
-            gsap.set(target, { yPercent: -100, filter: 'blur(14px)' });
-            gsap.to(target, { yPercent: 0, filter: 'blur(0px)', duration: d, ease: 'power3.inOut', clearProps: 'filter' });
-            gsap.to(video, { yPercent: 100, scale: 1.08, filter: 'blur(16px)', duration: d, ease: 'power3.inOut', onComplete: () => video.remove() });
+            const d = 1.6;
+            gsap.set(target, { yPercent: 0, '--reveal': '-30%' });
+            target.classList.add('is-revealing');
+            gsap.to(target, { '--reveal': '160%', duration: d, ease: 'power2.inOut', onComplete: () => target.classList.remove('is-revealing') });
+            gsap.fromTo(video, { filter: 'blur(0px) brightness(1)' }, { yPercent: 38, scale: 1.22, filter: 'blur(6px) brightness(1.08)', duration: d, ease: 'power2.in', onComplete: () => video.remove() });
           },
         });
       };
@@ -215,14 +238,14 @@ export function runIntro({ onReveal, onFinish } = {}) {
         resolve(null);
       };
       video.addEventListener('timeupdate', () => {
-        if (video.duration && video.currentTime >= video.duration - 1.0) handOver();
+        if (video.duration && video.currentTime >= video.duration - 1.5) handOver();
       });
       video.addEventListener('ended', handOver);
       // Only give up when the LAST <source> fails (the browser tries them in order) or the media errors.
       video.lastElementChild?.addEventListener('error', fail);
       video.addEventListener('error', fail);
       // Slow push-in for extra drone speed.
-      gsap.fromTo(video, { scale: 1.0 }, { scale: 1.12, duration: 6, ease: 'none' });
+      gsap.fromTo(video, { scale: 1.0 }, { scale: 1.08, duration: 6, ease: 'none' });
       video.play().catch(fail);
     });
 
@@ -303,13 +326,18 @@ export function runIntro({ onReveal, onFinish } = {}) {
       onContact: (pt) => reveal(pt),
     });
     preloader.seal();
-    gsap.set(photo.el, { yPercent: -100 });
+    gsap.set(photo.el, { '--reveal': '-30%' });
+    photo.el.classList.add('is-revealing');
     const video = await playDroneVideo();
     if (skipping || revealing) return;
     photo.prepare();
     if (video) video.whip(photo.el);
-    else gsap.fromTo(photo.el, { yPercent: 0, opacity: 0 }, { opacity: 1, duration: 0.8 });
-    photo.start();
+    else {
+      photo.el.classList.remove('is-revealing');
+      gsap.fromTo(photo.el, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+    }
+    // Barrel and glasses arrive while the sky is still flowing in.
+    gsap.delayedCall(video ? 0.55 : 0, () => photo.start());
   };
 
   if (use3D && site.intro?.mode === 'photo') runPhoto();

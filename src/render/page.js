@@ -106,10 +106,10 @@ function header() {
 function heroVideo() {
   const v = site.heroVideo;
   if (!v) return '';
-  // Starts paused (data-autoplay) — main.js plays it after the intro unless reduced motion is preferred.
-  return `<video class="hero__video" muted loop playsinline preload="none" data-autoplay${v.poster ? ` poster="${esc(asset(v.poster))}"` : ''} aria-hidden="true">${v.sources
-    .map(([src, type]) => `<source src="${esc(asset(src))}" type="${esc(type)}">`)
-    .join('')}</video>`;
+  // Sources are picked in main.js by screen orientation (portrait clip on phones, 16:9 crop on desktop);
+  // it starts after the intro, not for reduced motion.
+  const data = esc(JSON.stringify({ p: v.portrait.map(([s, t]) => [asset(s), t]), l: v.landscape.map(([s, t]) => [asset(s), t]), pp: asset(v.posterPortrait), pl: asset(v.posterLandscape) }));
+  return `<video class="hero__video" muted loop playsinline preload="none" data-autoplay data-sources="${data}" aria-hidden="true"></video>`;
 }
 
 function hero() {

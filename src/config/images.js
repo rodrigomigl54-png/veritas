@@ -14,8 +14,8 @@ export const brandImages = {
 };
 
 export const siteImages = {
-  'hero-desktop': { candidates: [`${U}/2022/10/2022-pocetna-2.jpg`, L('dron-3.5.jpg')] },
-  'hero-mobile': { candidates: [`${U}/2022/10/2022-pocetna-2-mob.jpg`] },
+  'hero-desktop': { candidates: [`${U}/2022/10/2022-pocetna-2.jpg`, L('veritas-dron-wide.jpg')] },
+  'hero-mobile': { candidates: [`${U}/2022/10/2022-pocetna-2-mob.jpg`, L('veritas-dron-tall.jpg')] },
   philosophy: {
     candidates: [
       `${U}/2022/08/nasa-filozofija.jpg`,
@@ -30,7 +30,7 @@ export const siteImages = {
   'about-1': { candidates: [`${U}/2022/08/o-nama-1.jpg`, L('photo-lineup.jpg')] },
   'about-2': { candidates: [`${U}/2022/08/o-nama-2.jpg`, L('photo-terrace.jpg')] },
 
-  'vineyards-hero': { candidates: [`${U}/2022/10/2022-vinogradi.jpg`, L('dron-11.5.jpg')] },
+  'vineyards-hero': { candidates: [`${U}/2022/10/2022-vinogradi.jpg`, L('veritas-dron-wide.jpg')] },
   'vineyards-hero-mobile': { candidates: [`${U}/2022/10/2022-vinogradi-mob.jpg`] },
   'vineyards-1': { candidates: [`${U}/2022/08/vinogradi-1.jpg`, L('photo-vineyard-poplars.jpg')] },
 
@@ -76,7 +76,7 @@ export const localImages = Object.fromEntries(
     'photo-two-glasses', 'photo-lineup', 'photo-vineyard-poplars', 'photo-grapes', 'photo-rose-glass', 'photo-terrace',
     'photo-cellar-2', 'photo-cellar-1', 'photo-food', 'photo-cellar-3', 'veritas-vinograd-put',
   ].map((n) => [n, { candidates: [L(`${n}.jpg`)], gallery: true }]).concat(
-    ['0.7', '3.5', '6.5', '8.5', '9.8', '11.5'].map((t) => [`dron-${t.replace('.', '-')}`, { candidates: [L(`dron-${t}.jpg`)], gallery: true }]),
+    [['veritas-dron-wide', 'veritas-dron-wide.jpg'], ['veritas-dron-tall', 'veritas-dron-tall.jpg']].map(([id, f]) => [id, { candidates: [L(f)], gallery: true }]),
   ),
 );
 

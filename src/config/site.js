@@ -67,25 +67,32 @@ export const site = {
         ['/video/sky-1080.mp4', 'video/mp4'],
       ],
     },
+    // The winery's own drone flight (assets/source/veritas-drone.mp4 → scripts/encode-drone.sh).
     droneVideo: {
-      poster: '/video/intro-poster.jpg',
-      large: [
-        ['/video/intro-drone-1080.webm', 'video/webm'],
-        ['/video/intro-drone-1080.mp4', 'video/mp4'],
+      posterPortrait: '/video/poster-portrait.jpg',
+      posterLandscape: '/video/poster-landscape.jpg',
+      portrait: [
+        ['/video/intro-portrait.webm', 'video/webm'],
+        ['/video/intro-portrait.mp4', 'video/mp4'],
       ],
-      small: [
-        ['/video/intro-drone-720.webm', 'video/webm'],
-        ['/video/intro-drone-720.mp4', 'video/mp4'],
+      landscape: [
+        ['/video/intro-landscape.webm', 'video/webm'],
+        ['/video/intro-landscape.mp4', 'video/mp4'],
       ],
     },
   },
 
   // Hero background: slow looping drone footage (poster = still frame). Null = photo only.
   heroVideo: {
-    poster: '/video/intro-poster.jpg',
-    sources: [
-      ['/video/hero-loop.webm', 'video/webm'],
-      ['/video/hero-loop.mp4', 'video/mp4'],
+    posterPortrait: '/video/poster-portrait.jpg',
+    posterLandscape: '/video/poster-landscape.jpg',
+    portrait: [
+      ['/video/hero-portrait.webm', 'video/webm'],
+      ['/video/hero-portrait.mp4', 'video/mp4'],
+    ],
+    landscape: [
+      ['/video/hero-landscape.webm', 'video/webm'],
+      ['/video/hero-landscape.mp4', 'video/mp4'],
     ],
   },
 
@@ -95,12 +102,12 @@ export const site = {
   sectionBackgrounds: {
     philosophy: { image: 'photo-grapes', strength: 0.82, blur: true },
     about: { image: 'veritas-vinograd-put', strength: 0.74 },
-    vineyards: { image: 'dron-11-5', strength: 0.7 },
+    vineyards: { image: 'veritas-dron-wide', strength: 0.7 },
     cellar: { image: 'photo-cellar-2', strength: 0.8, blur: true },
     visits: { image: 'photo-two-glasses', strength: 0.78, blur: true },
     gallery: { image: 'photo-lineup', strength: 0.86, blur: true },
-    shops: { image: 'dron-6-5', strength: 0.8 },
-    contact: { image: 'dron-9-8', strength: 0.76 },
+    shops: { image: 'photo-lineup', strength: 0.82, blur: true },
+    contact: { image: 'veritas-dron-wide', strength: 0.78 },
   },
 
   // Extra photos in the cellar collage (the wine-glass pictures).

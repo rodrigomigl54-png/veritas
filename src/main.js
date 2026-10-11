@@ -23,6 +23,19 @@ setManifest(manifest);
 function startHeroVideo() {
   const v = document.querySelector('.hero__video[data-autoplay]');
   if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData) return;
+  try {
+    const d = JSON.parse(v.dataset.sources);
+    const portrait = window.matchMedia('(orientation: portrait)').matches;
+    v.poster = portrait ? d.pp : d.pl;
+    (portrait ? d.p : d.l).forEach(([src, type]) => {
+      const s = document.createElement('source');
+      s.src = src;
+      s.type = type;
+      v.append(s);
+    });
+  } catch {
+    return;
+  }
   v.preload = 'auto';
   v.addEventListener('playing', () => v.classList.add('is-playing'), { once: true });
   v.play().catch(() => {});

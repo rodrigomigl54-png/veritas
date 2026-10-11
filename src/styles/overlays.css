@@ -591,31 +591,22 @@ html.is-intro .header-logo {
   aspect-ratio: 1;
   transform: translate(-50%, -50%) rotate(-14deg) scaleX(0.76);
 }
-.ic__brand,
-.ic__brand-burn {
+.ic__brand {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  /* crisp branded look: thin dark edge below, light edge above, warm glow */
+  filter: drop-shadow(0 1px 0 rgba(60, 28, 6, 0.85)) drop-shadow(0 -0.5px 0 rgba(255, 240, 200, 0.5));
+  animation: brandGlow 2.2s ease-in-out infinite alternate;
 }
-/* dark burned-in groove under the gold so the brand reads on light oak */
-.ic__brand-burn {
-  background: #3b1c07;
-  opacity: 0.8;
-  transform: translate(1.5px, 2.5px);
-  filter: blur(1.2px);
-}
-.ic__brand {
-  filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 10px rgba(255, 215, 130, 0.55));
-}
-.ic__brand.logo--gold {
-  --logo-color: linear-gradient(115deg, #8a5a14 0%, #d9a640 28%, #fff4cc 42%, #e8b54a 55%, #8a5a14 100%);
-  background-size: 260% 100%;
-  animation: brandGlow 2.4s ease-in-out infinite alternate;
+.ic__brand .logo__shine {
+  animation-duration: 2.6s;
+  animation-delay: 0.6s;
 }
 @keyframes brandGlow {
-  from { filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 6px rgba(255, 215, 130, 0.35)); }
-  to { filter: drop-shadow(0 1px 0 rgba(70, 35, 10, 0.75)) drop-shadow(0 0 22px rgba(255, 215, 120, 1)); }
+  from { filter: drop-shadow(0 1px 0 rgba(60, 28, 6, 0.85)) drop-shadow(0 0 3px rgba(255, 210, 120, 0.3)); }
+  to { filter: drop-shadow(0 1px 0 rgba(60, 28, 6, 0.85)) drop-shadow(0 0 12px rgba(255, 210, 120, 0.9)); }
 }
 /* brass spigot at the bottom of the barrel head */
 .ic__tap {
@@ -687,4 +678,46 @@ html.is-intro .header-logo {
   color: #fff;
   font-weight: 400;
   text-shadow: 0 1px 8px rgba(10, 30, 60, 0.55);
+}
+
+/* Sky flowing in from the top (intro "rise into the sky") */
+.ic.is-revealing {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(var(--reveal, 0%) - 55%), rgba(0, 0, 0, 0.6) calc(var(--reveal, 0%) - 25%), transparent var(--reveal, 0%));
+  mask-image: linear-gradient(to bottom, #000 calc(var(--reveal, 0%) - 55%), rgba(0, 0, 0, 0.6) calc(var(--reveal, 0%) - 25%), transparent var(--reveal, 0%));
+}
+
+/* Iris exit around the logo */
+.intro.is-iris > :is(.intro__canvas, .intro__shade, .ic, .intro__fallback, .intro__video) {
+  clip-path: circle(var(--iris) at var(--ix) var(--iy));
+}
+.intro__ring {
+  position: absolute;
+  left: var(--ix);
+  top: var(--iy);
+  width: calc(var(--iris) * 2);
+  height: calc(var(--iris) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(226, 201, 143, 0.9);
+  box-shadow: 0 0 24px rgba(226, 201, 143, 0.55), inset 0 0 24px rgba(226, 201, 143, 0.35);
+  pointer-events: none;
+}
+/* layer order: drone footage < sky scene (flows in over it) < logo / percentage / buttons */
+.intro .intro__video {
+  z-index: 0;
+}
+.intro .ic {
+  z-index: 1;
+}
+.intro__logo,
+.intro__progress,
+.intro__ring {
+  z-index: 3;
+}
+.intro__skip,
+.intro__sound {
+  z-index: 4;
+}
+.intro .intro__shade {
+  z-index: 2;
 }

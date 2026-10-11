@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T11:31:38.539Z",
+  "generatedAt": "2026-10-11T12:48:04.992Z",
   "images": {
     "logo-main": {
       "base": "/images/brand/logo-main",
@@ -72,9 +72,9 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JZgC7ABuehRf8ICC9qHYAAP2ErtJYsCRoDAbTtSsZo+WZu4t9Jsf9+PEXz9GG/tLmmDveyfgAAA==",
-      "dominant": "#687848",
-      "source": "local:dron-3.5.jpg"
+      "lqip": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JagCdMoADPBK8B/IhEyeD4AD+1NxDLiEpb5oXM75XkBh8fbFOUGJhgLJdfeXbyU6b50FajxYF70YA7LQAwrOru4lsh4kEVJSUU3RBxRsTQlcjSXA0AAAA",
+      "dominant": "#68b8e8",
+      "source": "local:veritas-dron-wide.jpg"
     },
     "philosophy": {
       "base": "/images/site/philosophy",
@@ -170,9 +170,9 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAABwBACdASoUAAsAPu1kqU2ppaQiMAgBMB2JagCdIHGJ/gPD9YZbk8AdMXHKAAD5I2ImyQ/svFOgH8v3R586/ez1tlzDi93JUy9oPDJ8XxQWqiSYYjLQiCoLqIeWeU4AbDlOcrCMAAA=",
-      "dominant": "#384818",
-      "source": "local:dron-11.5.jpg"
+      "lqip": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JagCdMoADPBK8B/IhEyeD4AD+1NxDLiEpb5oXM75XkBh8fbFOUGJhgLJdfeXbyU6b50FajxYF70YA7LQAwrOru4lsh4kEVJSUU3RBxRsTQlcjSXA0AAAA",
+      "dominant": "#68b8e8",
+      "source": "local:veritas-dron-wide.jpg"
     },
     "vineyards-1": {
       "base": "/images/site/vineyards-1",
@@ -596,16 +596,14 @@
       "dominant": "#182808",
       "source": "local:veritas-vinograd-put.jpg"
     },
-    "dron-0-7": {
-      "base": "/images/site/dron-0-7",
-      "width": 1920,
-      "height": 1080,
+    "hero-mobile": {
+      "base": "/images/site/hero-mobile",
+      "width": 1080,
+      "height": 1920,
       "widths": [
         480,
         800,
-        1200,
-        1600,
-        1920
+        1080
       ],
       "formats": [
         "avif",
@@ -613,12 +611,12 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgC/OBhl5Ygkp0AAAP43DZEM6OhCbbCq0RlJw0zyzOCODeLswyi9c5s4sZx9d6DrbIwA",
-      "dominant": "#686858",
-      "source": "local:dron-0.7.jpg"
+      "lqip": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAACwBQCdASoUACQAPu1orFGppaQiqrgKATAdiWgAv1lDwnG34+EEvMDMs1pY2wSWSDymZzWZ/iAA+TX2CQawQ40CVso1Eqpbk69UiWneLMstDf6u/j7av7qn/5NNlBf1obzO5bgkJmt3Uyyfu4rx9WATIpUGF+LochcB+N3Jkazejw6+MYaSkEyWJezXJ/wx5563IFtiZPEQ8NeIFHHJNJ+wm9LaKJmJq52B/FiN6BKVuZomL7mtR8S0CnQrr1m45PBezECi+iRXi5K/hjcdRvVbClhsAA==",
+      "dominant": "#0898e8",
+      "source": "local:veritas-dron-tall.jpg"
     },
-    "dron-3-5": {
-      "base": "/images/site/dron-3-5",
+    "veritas-dron-wide": {
+      "base": "/images/site/veritas-dron-wide",
       "width": 1920,
       "height": 1080,
       "widths": [
@@ -634,20 +632,18 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JZgC7ABuehRf8ICC9qHYAAP2ErtJYsCRoDAbTtSsZo+WZu4t9Jsf9+PEXz9GG/tLmmDveyfgAAA==",
-      "dominant": "#687848",
-      "source": "local:dron-3.5.jpg"
+      "lqip": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JagCdMoADPBK8B/IhEyeD4AD+1NxDLiEpb5oXM75XkBh8fbFOUGJhgLJdfeXbyU6b50FajxYF70YA7LQAwrOru4lsh4kEVJSUU3RBxRsTQlcjSXA0AAAA",
+      "dominant": "#68b8e8",
+      "source": "local:veritas-dron-wide.jpg"
     },
-    "dron-6-5": {
-      "base": "/images/site/dron-6-5",
-      "width": 1920,
-      "height": 1080,
+    "veritas-dron-tall": {
+      "base": "/images/site/veritas-dron-tall",
+      "width": 1080,
+      "height": 1920,
       "widths": [
         480,
         800,
-        1200,
-        1600,
-        1920
+        1080
       ],
       "formats": [
         "avif",
@@ -655,77 +651,13 @@
         "jpg"
       ],
       "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZgC0+f/gPND6BQZPsr/CBgAA+5xZCRB70Qxd9DD0wA+w9/gDzEIkigcO738R4F1y8hnaBcEgs+AhxwF1LMUM+AA=",
-      "dominant": "#386818",
-      "source": "local:dron-6.5.jpg"
-    },
-    "dron-8-5": {
-      "base": "/images/site/dron-8-5",
-      "width": 1920,
-      "height": 1080,
-      "widths": [
-        480,
-        800,
-        1200,
-        1600,
-        1920
-      ],
-      "formats": [
-        "avif",
-        "webp",
-        "jpg"
-      ],
-      "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAACwAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JbACdABqxmJ4x5+VEgADN1ckf4IEPGjXu7PoY4bpTBA5HDkmwd1jX46RGF2YuOlkC+6PU8RJNKEUc4eQqibgSJkcRGagAAAA=",
-      "dominant": "#a8c8d8",
-      "source": "local:dron-8.5.jpg"
-    },
-    "dron-9-8": {
-      "base": "/images/site/dron-9-8",
-      "width": 1920,
-      "height": 1080,
-      "widths": [
-        480,
-        800,
-        1200,
-        1600,
-        1920
-      ],
-      "formats": [
-        "avif",
-        "webp",
-        "jpg"
-      ],
-      "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQBACdASoUAAsAPu1iqk2ppaQiMAgBMB2JYgCdACKkjeLx8WrTud6FAADN3IoleSI4KU8xZPHgYh0Yj4Qwot0ZNPRMzt2bN06k1EeCHdXe4w/tp7VnCvSJIibIAAAA",
-      "dominant": "#989888",
-      "source": "local:dron-9.8.jpg"
-    },
-    "dron-11-5": {
-      "base": "/images/site/dron-11-5",
-      "width": 1920,
-      "height": 1080,
-      "widths": [
-        480,
-        800,
-        1200,
-        1600,
-        1920
-      ],
-      "formats": [
-        "avif",
-        "webp",
-        "jpg"
-      ],
-      "alpha": false,
-      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAABwBACdASoUAAsAPu1kqU2ppaQiMAgBMB2JagCdIHGJ/gPD9YZbk8AdMXHKAAD5I2ImyQ/svFOgH8v3R586/ez1tlzDi93JUy9oPDJ8XxQWqiSYYjLQiCoLqIeWeU4AbDlOcrCMAAA=",
-      "dominant": "#384818",
-      "source": "local:dron-11.5.jpg"
+      "lqip": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAACwBQCdASoUACQAPu1orFGppaQiqrgKATAdiWgAv1lDwnG34+EEvMDMs1pY2wSWSDymZzWZ/iAA+TX2CQawQ40CVso1Eqpbk69UiWneLMstDf6u/j7av7qn/5NNlBf1obzO5bgkJmt3Uyyfu4rx9WATIpUGF+LochcB+N3Jkazejw6+MYaSkEyWJezXJ/wx5563IFtiZPEQ8NeIFHHJNJ+wm9LaKJmJq52B/FiN6BKVuZomL7mtR8S0CnQrr1m45PBezECi+iRXi5K/hjcdRvVbClhsAA==",
+      "dominant": "#0898e8",
+      "source": "local:veritas-dron-tall.jpg"
     }
   },
   "galleryExtra": [],
   "missing": [
-    "hero-mobile",
     "about-hero-mobile",
     "vineyards-hero-mobile",
     "cellar-hero-mobile",
